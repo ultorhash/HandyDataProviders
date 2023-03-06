@@ -88,10 +88,6 @@
             ],
             "tsConfig": "projects/smart-exchange/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "projects/smart-exchange/src/favicon.ico",
-              "projects/smart-exchange/src/assets"
-            ],
             "styles": [
               "projects/smart-exchange/src/styles.scss"
             ],
