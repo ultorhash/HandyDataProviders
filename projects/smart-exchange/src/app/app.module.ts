@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
 import { AppRoutingModule } from './app-routing.module';
 import { ChartModule } from 'angular-highcharts';
 import { UiCoreModule } from 'ui-core';
@@ -27,6 +28,7 @@ import {
     AppRoutingModule,
     HttpClientModule,
     MatSnackBarModule,
+    MatButtonModule,
     ChartModule,
     UiCoreModule
   ],

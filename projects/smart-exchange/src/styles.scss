@@ -1,10 +1,6 @@
 @import '~normalize.css';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 html, body {
-  height: 100%
-}
-
-.mat-snack-bar-container {
-  padding: 0 !important;
-  min-height: unset !important;
+  height: 100%;
 }

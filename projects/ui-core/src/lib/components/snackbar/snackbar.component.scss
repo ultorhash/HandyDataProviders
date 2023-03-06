@@ -1,52 +1,53 @@
 @import '../../../../assets/colors.scss';
 
+::ng-deep .mdc-snackbar__surface {
+  padding-right: 0;
+}
+
+::ng-deep .mat-mdc-snack-bar-container .mdc-snackbar__surface {
+  border-radius: 0;
+}
+
+::ng-deep .mdc-snackbar__label {
+  padding: 0;
+}
+
+::ng-deep .mdc-linear-progress {
+  height: 6px !important;
+}
+
+::ng-deep .mdc-linear-progress__bar-inner {
+  border-top-width: 6px !important;
+}
+
+::ng-deep .success .mdc-linear-progress__bar-inner {
+  border-color: $basic-green !important;
+}
+
+::ng-deep .warning .mdc-linear-progress__bar-inner {
+  border-color: $basic-yellow !important;
+}
+
+::ng-deep .error .mdc-linear-progress__bar-inner {
+  border-color: $basic-red !important;
+}
+
+::ng-deep .info .mdc-linear-progress__bar-inner {
+  border-color: $basic-blue !important;
+}
+
 .snackbar-container {
-  min-height: 50px;
-  position: relative;
-  background-color: $basic-red;
+  background-color: $white;
 }
 
 .snackbar-row {
-  width: 100%;
-  height: 100%;
+  min-height: 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 8px;
 }
 
 .snackbar-message {
   color: $black;
-}
-
-.snackbar-button {
-  color: $black;
-}
-
-.snackbar-progress-bar {
-  height: 6px;
-  border-radius: 0;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-}
-
-::ng-deep .mat-progress-bar-buffer {
-  background-color: $white;
-}
-
-::ng-deep .success .mat-progress-bar-fill::after {
-  background-color: $basic-green !important;
-}
-
-::ng-deep .warning .mat-progress-bar-fill::after {
-  background-color: $basic-yellow !important;
-}
-
-::ng-deep .error .mat-progress-bar-fill::after {
-  background-color: $basic-red !important;
-}
-
-::ng-deep .info .mat-progress-bar-fill::after {
-  background-color: $basic-blue !important;
 }
