@@ -21,6 +21,7 @@
     "useDefineForClassFields": false,
     "paths": {
       "ui-core": [
+        "dist/ui-core/ui-core",
         "dist/ui-core"
       ]
     },

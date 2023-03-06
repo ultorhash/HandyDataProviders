@@ -1,1 +1,10 @@
 @import '~normalize.css';
+
+html, body {
+  height: 100%
+}
+
+.mat-snack-bar-container {
+  padding: 0 !important;
+  min-height: unset !important;
+}

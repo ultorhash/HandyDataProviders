@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'angular-highcharts';
 import { Observable, tap } from 'rxjs';
+import { ISnackbarData, SnackbarService, SnackbarTypes } from 'ui-core';
 import { CoingeckoDto } from '../../dtos';
 import { CoingeckoService } from '../../services';
 
@@ -26,10 +27,20 @@ export class DashboardComponent implements OnInit {
     ]
   });
 
-  constructor(private coingeckoService: CoingeckoService) {}
+  constructor(
+    private coingeckoService: CoingeckoService,
+    private snackbarService: SnackbarService
+  ) {}
 
   ngOnInit(): void {
     this.fetchData$().subscribe();
+
+    const config: ISnackbarData = {
+      type: SnackbarTypes.Success,
+      message: "Data loaded successfully",
+      duration: 50000
+    }
+    this.snackbarService.open(config);
   }
 
   fetchData$(): Observable<CoingeckoDto[]> {

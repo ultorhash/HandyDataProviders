@@ -1,13 +1,20 @@
 import { NgModule } from '@angular/core';
-import { UiCoreComponent } from './ui-core.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { SnackbarComponent } from './components/snackbar/snackbar.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
-    UiCoreComponent
+    SnackbarComponent
   ],
-  imports: [],
   exports: [
-    UiCoreComponent
+    SnackbarComponent
+  ],
+  imports: [
+    CommonModule,
+    BrowserModule,
+    MatProgressBarModule
   ]
 })
 export class UiCoreModule {}
