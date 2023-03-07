@@ -31,7 +31,6 @@
             "tsConfig": "projects/smart-exchange/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "projects/smart-exchange/src/favicon.ico",
               "projects/smart-exchange/src/assets"
             ],
             "styles": [

@@ -16,12 +16,12 @@ export class CoingeckoService {
   /**
    * Gets coin data specified in `CoingeckoDto`.
    * @param recap Price comparison to fiat currency. Default to `USD`.
-   * @param quantity Number of coins. Default to first `100`.
+   * @param quantity Number of coins. Default to first `50`.
    * @returns Collection of coins data
    */
   getCoinData(
     recap: Recaps = Recaps.USD,
-    quantity: number = 100
+    quantity: number = 50
   ): Observable<CoingeckoDto[]> {
     return this.http
       .get<CoingeckoDto[]>(`${this.API_URL}?vs_currency=${recap}&order=market_cap_desc&per_page=${quantity}`)
