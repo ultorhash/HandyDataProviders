@@ -13,7 +13,7 @@ interface ISnackbarBase {
 /** Additional data to interact with user. */
 export interface ISnackbarData extends ISnackbarBase {
 
-  /** Time to auto-close */
+  /** Time to auto-close in milliseconds */
   duration: number;
 
   /** Name that appears on dismiss button. Default to `OK`. */

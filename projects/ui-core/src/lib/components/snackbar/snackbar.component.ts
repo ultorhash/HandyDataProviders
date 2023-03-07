@@ -1,13 +1,11 @@
 import {
   Component,
   Inject,
-  OnDestroy,
   OnInit
 } from '@angular/core';
 import {
   interval,
-  Subject,
-  takeUntil,
+  takeWhile,
   tap
 } from 'rxjs';
 import { MatSnackBarRef, MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
@@ -19,8 +17,7 @@ import { ISnackbarData } from './snackbar.interface';
   templateUrl: './snackbar.component.html',
   styleUrls: ['./snackbar.component.scss']
 })
-export class SnackbarComponent implements OnInit, OnDestroy {
-  private unsubscribe$: Subject<void> = new Subject<void>();
+export class SnackbarComponent implements OnInit {
   private step: number = 0.005;
 
   public progress: number = 100;
@@ -40,36 +37,18 @@ export class SnackbarComponent implements OnInit, OnDestroy {
           this.runProgressBar(duration);
         })
       )
-      .subscribe()
-  }
-
-  ngOnDestroy(): void {
-    this.stopProgressBar();
+      .subscribe();
   }
 
   onDismiss(): void {
-    this.stopProgressBar();
-    this.snackbarRef.dismissWithAction()
+    this.snackbarRef.dismissWithAction();
   }
 
   private runProgressBar(duration: number): void {
-    this.progress = 100;
-
     interval(duration * this.step).pipe(
-      tap(() => {
-        this.progress -= 100 * this.step;
-
-        if (this.progress <= 0) {
-          this.stopProgressBar();
-        }
-      }),
-      takeUntil(this.unsubscribe$)
+      takeWhile(() => this.progress >= 0),
+      tap(() => this.progress -= 100 * this.step)
     )
-    .subscribe()
-  }
-
-  private stopProgressBar(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
+    .subscribe();
   }
 }

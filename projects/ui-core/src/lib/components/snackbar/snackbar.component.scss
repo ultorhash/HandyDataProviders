@@ -16,6 +16,10 @@
   height: 6px !important;
 }
 
+::ng-deep .mdc-linear-progress__bar {
+  transition: transform 0.1s linear !important;
+}
+
 ::ng-deep .mdc-linear-progress__bar-inner {
   border-top-width: 6px !important;
 }

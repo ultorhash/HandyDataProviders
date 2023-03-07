@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit {
     const config: ISnackbarData = {
       type: SnackbarTypes.Success,
       message: "Data loaded successfully",
-      duration: 400000
+      duration: 3000
     };
     this.snackbarService.open(config);
   }
