@@ -10,7 +10,13 @@ import { Observable, tap } from 'rxjs';
 import { CoingeckoDto } from '../../dtos';
 import { IPriceTable } from '../../interfaces';
 import { CoingeckoService } from '../../services';
-import { columnDefs } from './dashboard.data';
+import {
+  columnDefs,
+  dashboard,
+  defaultColDef,
+  gridOptions
+} from './dashboard.data';
+import { Cards } from './dashboard.enum';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,17 +28,12 @@ export class DashboardComponent implements OnInit {
 
   public rowData: IPriceTable[] = [];
   public columnDefs: ColDef<IPriceTable>[] = columnDefs;
-  public defaultColDef: ColDef = {
-    sortable: true,
-    flex: 100
-  };
-  public gridOptions: GridOptions = {
-    rowHeight: 30
-  };
+  public dashboard: GridsterItem[] = dashboard;
+  public defaultColDef: ColDef = defaultColDef;
+  public gridOptions: GridOptions = gridOptions;
+  public options: GridsterConfig = {} as GridsterConfig;
 
-  options: GridsterConfig = {} as GridsterConfig;
-  dashboard: Array<GridsterItem> = {} as Array<GridsterItem>;
-  style: object = {};
+  public cards: typeof Cards = Cards;
 
   constructor(
     private coingeckoService: CoingeckoService
@@ -49,12 +50,6 @@ export class DashboardComponent implements OnInit {
       gridType: "fit",
       displayGrid: "always"
     };
-
-    this.dashboard = [
-      { id: 1, cols: 10, rows: 1, y: 0, x: 0, dragEnabled: false, resizeEnabled: false },
-      { id: 2, cols: 7, rows: 10, y: 0, x: 0 },
-      { id: "price-table", cols: 3, rows: 10, y: 0, x: 0 }
-    ];
   }
 
   onPriceTableReady(event: GridReadyEvent): void {

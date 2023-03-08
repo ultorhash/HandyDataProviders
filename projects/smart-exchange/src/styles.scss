@@ -10,6 +10,11 @@ html, body {
 }
 
 /* region ag-grid */
+ag-grid-angular {
+  width: 100%;
+  height: 100%;
+}
+
 .ag-theme-alpine {
   --ag-header-foreground-color: #{$gray100};
   --ag-header-background-color: #{$gray800};

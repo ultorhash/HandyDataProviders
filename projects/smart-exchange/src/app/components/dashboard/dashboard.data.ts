@@ -1,5 +1,7 @@
-import { CellClassParams, ColDef, ValueFormatterParams } from "ag-grid-community";
+import { CellClassParams, ColDef, GridOptions, ValueFormatterParams } from "ag-grid-community";
+import { GridsterItem } from "angular-gridster2";
 import { IPriceTable } from "../../interfaces";
+import { Cards } from "./dashboard.enum";
 
 export const columnDefs: ColDef<IPriceTable>[] = [
   {
@@ -44,3 +46,38 @@ export const columnDefs: ColDef<IPriceTable>[] = [
     }
   }
 ];
+
+export const defaultColDef: ColDef = {
+  sortable: true,
+  flex: 100
+};
+
+export const gridOptions: GridOptions = {
+  rowHeight: 30
+};
+
+export const dashboard: GridsterItem[] = [
+  {
+    id: Cards.Options,
+    cols: 10,
+    rows: 1,
+    y: 0,
+    x: 0,
+    dragEnabled: false,
+    resizeEnabled: false
+  },
+  {
+    id: Cards.Chart,
+    cols: 7,
+    rows: 10,
+    y: 0,
+    x: 0
+  },
+  {
+    id: Cards.PriceTable,
+    cols: 3,
+    rows: 10,
+    y: 0,
+    x: 0
+  }
+]

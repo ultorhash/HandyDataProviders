@@ -1,33 +1,34 @@
-<div
-  class="container"
+<gridster
+  class="grid"
+  [options]="options"
 >
-  <gridster class="grid" [options]="options">
-    <gridster-item
-      *ngFor="let item of dashboard"
-      class="grid-card"
-      [item]="item"
-      [ngSwitch]="item.id"
+  <gridster-item
+    *ngFor="let item of dashboard"
+    class="card"
+    [item]="item"
+    [ngSwitch]="item.id"
+  >
+    <div
+      *ngSwitchCase="cards.PriceTable"
+      class="price-card"
     >
-      <div *ngSwitchCase="'price-table'" class="price-card">
-        <ag-grid-angular
-          style="width: 100%; height: 100%;"
-          class="ag-theme-alpine"
-          rowSelection="multiple"
-          [columnDefs]="columnDefs"
-          [defaultColDef]="defaultColDef"
-          [gridOptions]="gridOptions"
-          [rowDragEntireRow]="true"
-          [rowDragMultiRow]="true"
-          [rowDragManaged]="true"
-          [rowData]="rowData"
-          [animateRows]="true"
-          (gridReady)="onPriceTableReady($event)"
-        >
-        </ag-grid-angular>
-      </div>
-      <div *ngSwitchDefault>
-        {{ item.id }}
-      </div>
-    </gridster-item>
-  </gridster>
-</div>
+      <ag-grid-angular
+        class="ag-theme-alpine"
+        rowSelection="multiple"
+        [columnDefs]="columnDefs"
+        [defaultColDef]="defaultColDef"
+        [gridOptions]="gridOptions"
+        [rowData]="rowData"
+        [rowDragEntireRow]="true"
+        [rowDragMultiRow]="true"
+        [rowDragManaged]="true"
+        [animateRows]="true"
+        (gridReady)="onPriceTableReady($event)"
+      >
+      </ag-grid-angular>
+    </div>
+    <div *ngSwitchDefault>
+      {{ item.id }}
+    </div>
+  </gridster-item>
+</gridster>
