@@ -4,11 +4,7 @@ import {
   GridApi,
   GridReadyEvent
 } from 'ag-grid-community';
-import {
-  ISnackbarData,
-  SnackbarService,
-  SnackbarTypes
-} from 'ui-core';
+import { GridsterConfig, GridsterItem } from 'angular-gridster2';
 import { Observable, tap } from 'rxjs';
 import { CoingeckoDto } from '../../dtos';
 import { IPriceTable } from '../../interfaces';
@@ -30,18 +26,31 @@ export class DashboardComponent implements OnInit {
     flex: 200
   };
 
+  options: GridsterConfig = {} as GridsterConfig;
+  dashboard: Array<GridsterItem> = {} as Array<GridsterItem>;
+  style: object = {};
+
   constructor(
-    private coingeckoService: CoingeckoService,
-    private snackbarService: SnackbarService
+    private coingeckoService: CoingeckoService
   ) {}
 
   ngOnInit(): void {
-    const config: ISnackbarData = {
-      type: SnackbarTypes.Success,
-      message: "Data loaded successfully",
-      duration: 3000
+    this.options = {
+      resizable: {
+        enabled: true
+      },
+      draggable: {
+        enabled: true
+      },
+      gridType: "fit",
+      displayGrid: "always"
     };
-    this.snackbarService.open(config);
+
+    this.dashboard = [
+      { id: 1, cols: 10, rows: 1, y: 0, x: 0, dragEnabled: false, resizeEnabled: false },
+      { id: 2, cols: 7, rows: 10, y: 0, x: 0 },
+      { id: "price-table", cols: 3, rows: 10, y: 0, x: 0 }
+    ];
   }
 
   onPriceTableReady(event: GridReadyEvent): void {
@@ -52,7 +61,6 @@ export class DashboardComponent implements OnInit {
   fetchData$(): Observable<CoingeckoDto[]> {
     return this.coingeckoService.getCoinData().pipe(
       tap((res: CoingeckoDto[]) => {
-        console.log(res);
         const priceData = res.reduce((acc: IPriceTable[], curr: CoingeckoDto) => {
           return [
             ...acc, {

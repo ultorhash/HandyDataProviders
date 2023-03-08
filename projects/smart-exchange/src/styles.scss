@@ -8,6 +8,7 @@ html, body {
   height: 100%;
 }
 
+/* region ag-grid */
 .ag-theme-alpine {
   --ag-header-foreground-color: #{$gray100};
   --ag-header-background-color: #{$gray800};
@@ -48,23 +49,31 @@ html, body {
     height: 20px;
   }
 }
+/* endregion ag-grid */
 
-/* #region Scroll bars */
+/* region gridster */
+gridster .gridster-column {
+  border-color: $gray800 !important;
+}
+gridster .gridster-row {
+  border-color: $gray800 !important;
+}
+/* endregion gridster */
+
+/* #region scroll bars */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
   background: $gray800;
-  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
   background: $gray500;
-  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: $gray500;
 }
-/* #endregion Scroll bars */
+/* #endregion scroll bars */

@@ -11,6 +11,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AppRoutingModule } from './app-routing.module';
 import { ChartModule } from 'angular-highcharts';
 import { AgGridModule } from 'ag-grid-angular';
+import { GridsterModule } from 'angular-gridster2';
 import { UiCoreModule } from 'ui-core';
 
 import { AppComponent } from './app.component';
@@ -38,6 +39,7 @@ import {
     DragDropModule,
     ChartModule,
     AgGridModule,
+    GridsterModule,
     UiCoreModule
   ],
   providers: [],
