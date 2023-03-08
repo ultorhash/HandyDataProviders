@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {
   ColDef,
   GridApi,
+  GridOptions,
   GridReadyEvent
 } from 'ag-grid-community';
 import { GridsterConfig, GridsterItem } from 'angular-gridster2';
@@ -23,7 +24,10 @@ export class DashboardComponent implements OnInit {
   public columnDefs: ColDef<IPriceTable>[] = columnDefs;
   public defaultColDef: ColDef = {
     sortable: true,
-    flex: 200
+    flex: 100
+  };
+  public gridOptions: GridOptions = {
+    rowHeight: 30
   };
 
   options: GridsterConfig = {} as GridsterConfig;
