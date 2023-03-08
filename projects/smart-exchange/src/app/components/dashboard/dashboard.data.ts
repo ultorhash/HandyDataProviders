@@ -1,5 +1,5 @@
 import { CellClassParams, ColDef, GridOptions, ValueFormatterParams } from "ag-grid-community";
-import { GridsterItem } from "angular-gridster2";
+import { GridsterConfig, GridsterItem } from "angular-gridster2";
 import { IPriceTable } from "../../interfaces";
 import { Cards } from "./dashboard.enum";
 
@@ -56,6 +56,17 @@ export const gridOptions: GridOptions = {
   rowHeight: 30
 };
 
+export const gridsterOptions: GridsterConfig = {
+  resizable: {
+    enabled: true
+  },
+  draggable: {
+    enabled: true
+  },
+  gridType: "fit",
+  displayGrid: "always"
+};
+
 export const dashboard: GridsterItem[] = [
   {
     id: Cards.Options,
@@ -80,4 +91,4 @@ export const dashboard: GridsterItem[] = [
     y: 0,
     x: 0
   }
-]
+];

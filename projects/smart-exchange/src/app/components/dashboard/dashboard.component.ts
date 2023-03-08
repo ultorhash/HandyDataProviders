@@ -14,7 +14,8 @@ import {
   columnDefs,
   dashboard,
   defaultColDef,
-  gridOptions
+  gridOptions,
+  gridsterOptions
 } from './dashboard.data';
 import { Cards } from './dashboard.enum';
 
@@ -31,7 +32,7 @@ export class DashboardComponent implements OnInit {
   public dashboard: GridsterItem[] = dashboard;
   public defaultColDef: ColDef = defaultColDef;
   public gridOptions: GridOptions = gridOptions;
-  public options: GridsterConfig = {} as GridsterConfig;
+  public options: GridsterConfig = gridsterOptions;
 
   public cards: typeof Cards = Cards;
 
@@ -40,16 +41,7 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.options = {
-      resizable: {
-        enabled: true
-      },
-      draggable: {
-        enabled: true
-      },
-      gridType: "fit",
-      displayGrid: "always"
-    };
+
   }
 
   onPriceTableReady(event: GridReadyEvent): void {
