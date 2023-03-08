@@ -4,5 +4,6 @@
 export enum Cards {
   Options = 'Options',
   Chart = 'Chart',
-  PriceTable = 'Price Table'
+  PriceTable = 'Price Table',
+  Summary = 'Summary'
 }

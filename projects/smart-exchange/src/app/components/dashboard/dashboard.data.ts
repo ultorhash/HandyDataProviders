@@ -61,10 +61,11 @@ export const gridsterOptions: GridsterConfig = {
     enabled: true
   },
   draggable: {
-    enabled: true
+    enabled: true,
+    ignoreContentClass: 'ag-theme-alpine',
   },
-  gridType: "fit",
-  displayGrid: "always"
+  gridType: 'fit',
+  displayGrid: 'always'
 };
 
 export const dashboard: GridsterItem[] = [
@@ -87,7 +88,14 @@ export const dashboard: GridsterItem[] = [
   {
     id: Cards.PriceTable,
     cols: 3,
-    rows: 10,
+    rows: 6,
+    y: 0,
+    x: 0
+  },
+  {
+    id: Cards.Summary,
+    cols: 3,
+    rows: 4,
     y: 0,
     x: 0
   }

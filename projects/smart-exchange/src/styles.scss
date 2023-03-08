@@ -20,6 +20,7 @@ ag-grid-angular {
   --ag-header-background-color: #{$gray800};
   --ag-background-color: #{$gray800};
   --ag-font-size: #{$table-font-size};
+  --ag-selected-row-background-color: #{$blue800};
 
   .ag-root-wrapper {
     border: none;
@@ -30,8 +31,7 @@ ag-grid-angular {
     border-bottom: 1px solid $gray700;
   }
 
-  .ag-row,
-  .ag-cell {
+  .ag-row {
     background-color: $gray800;
   }
 
@@ -39,6 +39,10 @@ ag-grid-angular {
     color: $white;
     font-weight: 500;
   }
+}
+
+.ag-cell-focus {
+  border: 1px solid transparent !important;
 }
 
 .cell__value-positive {
