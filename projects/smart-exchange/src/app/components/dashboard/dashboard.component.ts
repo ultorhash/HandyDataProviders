@@ -1,9 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { Chart } from 'angular-highcharts';
+import {
+  ColDef,
+  GridApi,
+  GridReadyEvent
+} from 'ag-grid-community';
+import {
+  ISnackbarData,
+  SnackbarService,
+  SnackbarTypes
+} from 'ui-core';
 import { Observable, tap } from 'rxjs';
-import { ISnackbarData, SnackbarService, SnackbarTypes } from 'ui-core';
 import { CoingeckoDto } from '../../dtos';
+import { IPriceTable } from '../../interfaces';
 import { CoingeckoService } from '../../services';
+import { columnDefs } from './dashboard.data';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,21 +21,14 @@ import { CoingeckoService } from '../../services';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  chart = new Chart({
-    title: {
-      text: ''
-    },
-    credits: {
-      enabled: false
-    },
-    series: [
-      {
-        name: 'Line 1',
-        type: 'column',
-        data: [1, 2, 3, 5, 7, 8, 5, 3, 6, 10, 5, 4, 3, 10, 12, 13, 2, 4, 5, 8, 7]
-      }
-    ]
-  });
+  private gridApi: GridApi = {} as GridApi;
+
+  public rowData: IPriceTable[] = [];
+  public columnDefs: ColDef<IPriceTable>[] = columnDefs;
+  public defaultColDef: ColDef = {
+    sortable: true,
+    flex: 200
+  };
 
   constructor(
     private coingeckoService: CoingeckoService,
@@ -33,8 +36,6 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.fetchData$().subscribe();
-
     const config: ISnackbarData = {
       type: SnackbarTypes.Success,
       message: "Data loaded successfully",
@@ -43,9 +44,29 @@ export class DashboardComponent implements OnInit {
     this.snackbarService.open(config);
   }
 
+  onPriceTableReady(event: GridReadyEvent): void {
+    this.gridApi = event.api;
+    this.fetchData$().subscribe();
+  }
+
   fetchData$(): Observable<CoingeckoDto[]> {
     return this.coingeckoService.getCoinData().pipe(
-      tap((res) => console.log(res))
+      tap((res: CoingeckoDto[]) => {
+        console.log(res);
+        const priceData = res.reduce((acc: IPriceTable[], curr: CoingeckoDto) => {
+          return [
+            ...acc, {
+              image: curr.image,
+              symbol: curr.symbol.toUpperCase(),
+              change: curr.priceChange24h,
+              percentageChange: curr.priceChangePercentage24h,
+              price: curr.currentPrice
+            }
+          ];
+        }, [] as IPriceTable[]);
+
+        this.gridApi.setRowData(priceData);
+      })
     );
   }
 }

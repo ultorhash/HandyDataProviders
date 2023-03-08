@@ -1,8 +1,70 @@
 @import '~normalize.css';
-@import "~ag-grid-community/styles//ag-grid.css";
-@import "~ag-grid-community/styles//ag-theme-alpine.css";
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~ag-grid-community/styles/ag-grid.css';
+@import '~ag-grid-community/styles/ag-theme-alpine.css';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import './styles/colors.scss';
 
 html, body {
   height: 100%;
 }
+
+.ag-theme-alpine {
+  --ag-header-foreground-color: #{$gray100};
+  --ag-header-background-color: #{$gray800};
+  --ag-background-color: #{$gray800};
+
+  .ag-header {
+    border-bottom: 1px solid $gray500;
+  }
+
+  .ag-row {
+    border: none;
+    background-color: $gray800;
+  }
+
+  .ag-cell {
+    background-color: $gray800;
+    color: $white;
+    font-weight: 500;
+  }
+}
+
+.cell__value-positive {
+  color: $green-value !important;
+}
+
+.cell__value-negative {
+  color: $red-value !important;
+}
+
+.cell__value-image {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+
+  img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* #region Scroll bars */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $gray800;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $gray500;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $gray500;
+}
+/* #endregion Scroll bars */
