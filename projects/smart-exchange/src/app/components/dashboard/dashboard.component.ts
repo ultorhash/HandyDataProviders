@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   ColDef,
   GridApi,
   GridOptions,
   GridReadyEvent
 } from 'ag-grid-community';
-import { GridsterConfig, GridsterItem } from 'angular-gridster2';
+import { GridsterConfig } from 'angular-gridster2';
+import * as Highcharts from 'highcharts';
 import { Observable, tap } from 'rxjs';
 import { CoingeckoDto } from '../../dtos';
 import { IPriceTable } from '../../interfaces';
@@ -18,36 +19,110 @@ import {
   gridsterOptions
 } from './dashboard.data';
 import { Cards } from './dashboard.enum';
+import { ExtendedGridsterItem } from './dashboard.interface';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
+  private chartRef: Highcharts.Chart = {} as Highcharts.Chart;
   private gridApi: GridApi = {} as GridApi;
 
   public rowData: IPriceTable[] = [];
   public columnDefs: ColDef<IPriceTable>[] = columnDefs;
-  public dashboard: GridsterItem[] = dashboard;
+  public dashboard: ExtendedGridsterItem[] = dashboard;
   public defaultColDef: ColDef = defaultColDef;
   public gridOptions: GridOptions = gridOptions;
-  public options: GridsterConfig = gridsterOptions;
+  public gridsterOptions: GridsterConfig = gridsterOptions;
+  public chartOptions: Highcharts.Options = {
+    xAxis: {
+      type: 'datetime'
+    },
+    plotOptions: {
+      area: {
+        fillColor: {
+          linearGradient: {
+            x1: 0,
+            y1: 0,
+            x2: 0,
+            y2: 1
+          },
+          stops: [
+            [0, "red"],
+            [1, "green"]
+          ]
+        },
+        marker: {
+          radius: 2
+        },
+        lineWidth: 1,
+        states: {
+          hover: {
+            lineWidth: 1
+          }
+        },
+        threshold: null
+      }
+    },
+    series: [
+      {
+        type: 'line',
+        data: [
+          [
+            1167609600000,
+            0.7537
+          ],
+          [
+            1167696000000,
+            0.7537
+          ],
+          [
+            1167782400000,
+            0.7559
+          ],
+          [
+            1167868800000,
+            0.7631
+          ],
+          [
+            1167955200000,
+            0.7644
+          ],
+          [
+            1168214400000,
+            0.769
+          ],
+          [
+            1168300800000,
+            0.7683
+          ],
+          [
+            1168387200000,
+            0.77
+          ],
+          [
+            1168473600000,
+            0.7703
+          ],
+          [
+            1168560000000,
+            0.7757
+          ],
+          [
+            1168819200000,
+            0.7728
+          ]
+        ]
+      }
+    ]
+  }
 
   public cards: typeof Cards = Cards;
+  public Highcharts: typeof Highcharts = Highcharts;
 
-  constructor(
-    private coingeckoService: CoingeckoService
-  ) {}
-
-  ngOnInit(): void {
-
-  }
-
-  onPriceTableReady(event: GridReadyEvent): void {
-    this.gridApi = event.api;
-    this.fetchData$().subscribe();
-  }
+  constructor(private coingeckoService: CoingeckoService) {}
 
   fetchData$(): Observable<CoingeckoDto[]> {
     return this.coingeckoService.getCoinData().pipe(
@@ -67,5 +142,20 @@ export class DashboardComponent implements OnInit {
         this.gridApi.setRowData(priceData);
       })
     );
+  }
+
+  onResize(item: ExtendedGridsterItem): void {
+    if (item.id === Cards.Chart) {
+      this.chartRef.reflow();
+    }
+  }
+
+  onPriceTableReady(event: GridReadyEvent): void {
+    this.gridApi = event.api;
+    this.fetchData$().subscribe();
+  }
+
+  chartCallback: Highcharts.ChartCallbackFunction = (chart): void => {
+    this.chartRef = chart;
   }
 }
