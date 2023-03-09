@@ -5,15 +5,12 @@
   background-color: $gray900;
 }
 
-.card {
+.grid-item {
   background-color: $gray800;
   padding: 15px;
 }
 
-.chart-card {
+.card {
   @include full-size;
 }
 
-.price-card {
-  @include full-size;
-}

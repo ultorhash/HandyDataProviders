@@ -1,16 +1,29 @@
 <gridster
   class="grid"
-  [options]="options"
+  [options]="gridsterOptions"
 >
   <gridster-item
     *ngFor="let item of dashboard"
-    class="card"
+    class="grid-item"
     [item]="item"
     [ngSwitch]="item.id"
+    (itemResize)="onResize(item)"
   >
     <div
+      *ngSwitchCase="cards.Chart"
+      class="card"
+    >
+      <highcharts-chart
+        #chart
+        [Highcharts]="Highcharts"
+        [options]="chartOptions"
+        [callbackFunction]="chartCallback"
+      >
+      </highcharts-chart>
+    </div>
+    <div
       *ngSwitchCase="cards.PriceTable"
-      class="price-card"
+      class="card"
     >
       <ag-grid-angular
         class="ag-theme-alpine"
