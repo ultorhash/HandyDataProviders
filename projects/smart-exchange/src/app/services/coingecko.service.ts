@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map, mergeMap, Observable, timer } from 'rxjs';
 import { toCamel } from 'snake-camel';
 import { CoingeckoDto } from '../dtos';
 import { Recaps } from '../enums';
@@ -23,10 +23,14 @@ export class CoingeckoService {
     recap: Recaps = Recaps.USD,
     quantity: number = 50
   ): Observable<CoingeckoDto[]> {
-    return this.http
-      .get<CoingeckoDto[]>(`${this.API_URL}?vs_currency=${recap}&order=market_cap_desc&per_page=${quantity}`)
-      .pipe(
-        map((res: CoingeckoDto[]) => res.map(toCamel) as CoingeckoDto[])
-      );
+    return timer(0, 5000).pipe(
+      mergeMap(() => {
+        return this.http.get<CoingeckoDto[]>(
+          `${this.API_URL}?vs_currency=${recap}&` +
+          `order=market_cap_desc&per_page=${quantity}`
+        );
+      }),
+      map((res: CoingeckoDto[]) => res.map(toCamel) as CoingeckoDto[])
+    )
   }
 }

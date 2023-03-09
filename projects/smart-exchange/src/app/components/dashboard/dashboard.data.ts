@@ -53,7 +53,8 @@ export const defaultColDef: ColDef = {
 };
 
 export const gridOptions: GridOptions = {
-  rowHeight: 30
+  rowHeight: 30,
+  suppressScrollOnNewData: true
 };
 
 export const gridsterOptions: GridsterConfig = {
@@ -82,21 +83,21 @@ export const dashboard: GridsterItem[] = [
     id: Cards.Chart,
     cols: 7,
     rows: 10,
-    y: 0,
+    y: 1,
     x: 0
   },
   {
     id: Cards.PriceTable,
     cols: 3,
     rows: 6,
-    y: 0,
-    x: 0
+    y: 1,
+    x: 7
   },
   {
     id: Cards.Summary,
     cols: 3,
     rows: 4,
-    y: 0,
-    x: 0
+    y: 7,
+    x: 7
   }
 ];
