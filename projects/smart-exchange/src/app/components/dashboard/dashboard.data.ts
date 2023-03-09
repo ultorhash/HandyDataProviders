@@ -1,7 +1,13 @@
-import { CellClassParams, ColDef, GridOptions, ValueFormatterParams } from "ag-grid-community";
-import { GridsterConfig, GridsterItem } from "angular-gridster2";
+import {
+  CellClassParams,
+  ColDef,
+  GridOptions,
+  ValueFormatterParams
+} from "ag-grid-community";
+import { GridsterConfig } from "angular-gridster2";
 import { IPriceTable } from "../../interfaces";
 import { Cards } from "./dashboard.enum";
+import { ExtendedGridsterItem } from "./dashboard.interface";
 
 export const columnDefs: ColDef<IPriceTable>[] = [
   {
@@ -69,15 +75,13 @@ export const gridsterOptions: GridsterConfig = {
   displayGrid: 'always'
 };
 
-export const dashboard: GridsterItem[] = [
+export const dashboard: ExtendedGridsterItem[] = [
   {
     id: Cards.Options,
     cols: 10,
     rows: 1,
     y: 0,
-    x: 0,
-    dragEnabled: false,
-    resizeEnabled: false
+    x: 0
   },
   {
     id: Cards.Chart,

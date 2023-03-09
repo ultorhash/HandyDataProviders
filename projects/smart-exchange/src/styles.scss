@@ -66,6 +66,14 @@ ag-grid-angular {
 }
 /* endregion ag-grid */
 
+/* highcharts */
+highcharts-chart {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/* endregion highcharts */
+
 /* region gridster */
 gridster .gridster-column {
   border-color: $gray800 !important;

@@ -9,9 +9,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AppRoutingModule } from './app-routing.module';
-import { ChartModule } from 'angular-highcharts';
 import { AgGridModule } from 'ag-grid-angular';
 import { GridsterModule } from 'angular-gridster2';
+import { HighchartsChartModule } from 'highcharts-angular';
 import { UiCoreModule } from 'ui-core';
 
 import { AppComponent } from './app.component';
@@ -37,9 +37,9 @@ import {
     MatGridListModule,
     MatCardModule,
     DragDropModule,
-    ChartModule,
     AgGridModule,
     GridsterModule,
+    HighchartsChartModule,
     UiCoreModule
   ],
   providers: [],
