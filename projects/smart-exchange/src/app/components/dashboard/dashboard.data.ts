@@ -69,7 +69,7 @@ export const gridsterOptions: GridsterConfig = {
   },
   draggable: {
     enabled: true,
-    ignoreContentClass: 'ag-theme-alpine',
+    ignoreContentClass: 'card-content',
   },
   gridType: 'fit',
   displayGrid: 'always'

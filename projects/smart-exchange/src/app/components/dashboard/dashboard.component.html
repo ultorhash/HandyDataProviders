@@ -14,6 +14,7 @@
       class="card"
     >
       <highcharts-chart
+        class="card-content"
         [Highcharts]="Highcharts"
         [options]="chartOptions"
         [callbackFunction]="chartCallback"
@@ -25,7 +26,7 @@
       class="card"
     >
       <ag-grid-angular
-        class="ag-theme-alpine"
+        class="ag-theme-alpine card-content"
         rowSelection="multiple"
         [columnDefs]="columnDefs"
         [defaultColDef]="defaultColDef"
