@@ -1,3 +1,5 @@
+import { TimePrice } from "../types";
+
 export type CoingeckoDto = {
   id: string;
   symbol: string;
@@ -24,4 +26,10 @@ export type CoingeckoDto = {
   atlChangePercentage: number;
   atlDate: Date;
   lastUpdated: Date;
+}
+
+export type HistoricDataDto = {
+  marketCaps: TimePrice[],
+  prices: TimePrice[],
+  totalVolumes: TimePrice[]
 }

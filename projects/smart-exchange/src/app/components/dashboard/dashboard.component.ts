@@ -37,38 +37,63 @@ export class DashboardComponent {
   public gridOptions: GridOptions = gridOptions;
   public gridsterOptions: GridsterConfig = gridsterOptions;
   public chartOptions: Highcharts.Options = {
+    chart: {
+      zooming: {
+        type: 'x',
+      }
+    },
+    accessibility: {
+      enabled: false
+    },
+    title: {
+      text: 'USD to EUR exchange rate over time',
+      align: 'left'
+    },
+    subtitle: {
+        text: document.ontouchstart === undefined ?
+            'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in',
+        align: 'left'
+    },
     xAxis: {
-      type: 'datetime'
+        type: 'datetime'
+    },
+    yAxis: {
+        title: {
+            text: 'Exchange rate'
+        }
+    },
+    legend: {
+        enabled: false
     },
     plotOptions: {
-      area: {
-        fillColor: {
-          linearGradient: {
-            x1: 0,
-            y1: 0,
-            x2: 0,
-            y2: 1
-          },
-          stops: [
-            [0, "red"],
-            [1, "green"]
-          ]
-        },
-        marker: {
-          radius: 2
-        },
-        lineWidth: 1,
-        states: {
-          hover: {
-            lineWidth: 1
-          }
-        },
-        threshold: null
-      }
+        area: {
+            fillColor: {
+                linearGradient: {
+                    x1: 0,
+                    y1: 0,
+                    x2: 0,
+                    y2: 1
+                },
+                stops: [
+                    [0, "#000000"],
+                    [1, "#FF0000"]
+                ]
+            },
+            marker: {
+                radius: 2
+            },
+            lineWidth: 1,
+            states: {
+                hover: {
+                    lineWidth: 1
+                }
+            },
+            threshold: null
+        }
     },
     series: [
       {
-        type: 'line',
+        type: 'area',
         data: [
           [
             1167609600000,
@@ -125,7 +150,7 @@ export class DashboardComponent {
   constructor(private coingeckoService: CoingeckoService) {}
 
   fetchData$(): Observable<CoingeckoDto[]> {
-    return this.coingeckoService.getCoinData().pipe(
+    return this.coingeckoService.getCoinsData$().pipe(
       tap((res: CoingeckoDto[]) => {
         const priceData = res.reduce((acc: IPriceTable[], curr: CoingeckoDto) => {
           return [
@@ -153,6 +178,10 @@ export class DashboardComponent {
   onPriceTableReady(event: GridReadyEvent): void {
     this.gridApi = event.api;
     this.fetchData$().subscribe();
+    this.coingeckoService.getCoinHistoricPrices$('bitcoin', 30).pipe(
+      tap((res) => console.log(res))
+    )
+    .subscribe();
   }
 
   chartCallback: Highcharts.ChartCallbackFunction = (chart): void => {
