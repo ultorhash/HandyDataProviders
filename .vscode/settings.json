@@ -3,6 +3,7 @@
     "datetime",
     "endregion",
     "gridster",
-    "Highcharts"
+    "Highcharts",
+    "hollowcandlestick"
   ]
 }

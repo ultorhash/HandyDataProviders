@@ -6,7 +6,6 @@ import {
   GridReadyEvent
 } from 'ag-grid-community';
 import { GridsterConfig } from 'angular-gridster2';
-import * as Highcharts from 'highcharts';
 import { Observable, tap } from 'rxjs';
 import { CoingeckoDto } from '../../dtos';
 import { Intervals } from '../../enums';
@@ -21,13 +20,14 @@ import {
 } from './dashboard.data';
 import { Cards, Colors } from './dashboard.enum';
 import { ExtendedGridsterItem } from './dashboard.interface';
+import { BasicChartComponent } from '../shared';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent {
+export class DashboardComponent extends BasicChartComponent {
   private chart: Highcharts.Chart = {} as Highcharts.Chart;
   private gridApi: GridApi = {} as GridApi;
 
@@ -37,70 +37,34 @@ export class DashboardComponent {
   public defaultColDef: ColDef = defaultColDef;
   public gridOptions: GridOptions = gridOptions;
   public gridsterOptions: GridsterConfig = gridsterOptions;
-  public chartOptions: Highcharts.Options = {
-    chart: {
-      zooming: {
-        type: 'xy',
-      },
-      backgroundColor: Colors.GRAY800
+  public options: Highcharts.Options = {
+    rangeSelector: {
+      selected: 1
     },
-    accessibility: {
-      enabled: false
-    },
-    title: {
-      text: undefined
-    },
-    xAxis: {
-      type: 'datetime',
-      minorGridLineWidth: 0
-    },
-    yAxis: {
-      title: undefined,
-      gridLineColor: Colors.TRANSPARENT
-    },
-    legend: {
-      enabled: false
-    },
-    credits: {
-      enabled: false
-    },
-    plotOptions: {
-      area: {
-        fillColor: {
-          linearGradient: {
-            x1: 0,
-            y1: 0,
-            x2: 0,
-            y2: 1
-          },
-          stops: [
-            [0, Colors.BLUE800],
-            [1, Colors.GRAY800]
-          ]
-        },
-        marker: {
-          radius: 2
-        },
-        lineWidth: 1,
-        states: {
-          hover: {
-            lineWidth: 1
-          }
-        },
-        threshold: null
+    navigator: {
+      series: {
+        color: 'red'
       }
     },
     series: [
       {
-        type: 'area'
-      }
+        type: "hollowcandlestick",
+        data: [
+          [1521466200000, 177.32, 177.47, 173.66, 175.3],
+          [1521552600000, 175.24, 176.8, 174.94, 175.24],
+          [1521639000000, 175.04, 175.09, 171.26, 171.27],
+          [1521725400000, 170, 172.68, 168.6, 168.85]
+        ]
+      },
     ]
   }
 
   public cards: typeof Cards = Cards;
-  public Highcharts: typeof Highcharts = Highcharts;
 
-  constructor(private coingeckoService: CoingeckoService) {}
+  constructor(private coingeckoService: CoingeckoService) {
+    super();
+    this.chartOptions = this.options;
+  }
 
   fetchData$(): Observable<CoingeckoDto[]> {
     return this.coingeckoService.getCoinsData$().pipe(
@@ -138,11 +102,11 @@ export class DashboardComponent {
 
     this.coingeckoService.getCoinHistoricPrices$('bitcoin', 30, Intervals.HOURLY).pipe(
       tap((res) => {
-        for (let i = 0; i < res.length; i++) {
-          this.chart.series[0].addPoint(res[i], false);
-        }
+        // for (let i = 0; i < res.length; i++) {
+        //   this.chart.series[0].addPoint(res[i], false);
+        // }
 
-        this.chart.redraw();
+        // this.chart.redraw();
       })
     )
     .subscribe();

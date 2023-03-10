@@ -19,12 +19,14 @@ import {
   HomeComponent,
   DashboardComponent
 } from './components';
+import { BasicChartComponent } from './components/shared';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    DashboardComponent
+    DashboardComponent,
+    BasicChartComponent
   ],
   imports: [
     CommonModule,
