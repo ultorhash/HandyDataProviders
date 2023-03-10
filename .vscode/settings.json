@@ -4,6 +4,7 @@
     "endregion",
     "gridster",
     "Highcharts",
-    "hollowcandlestick"
+    "hollowcandlestick",
+    "OHLC"
   ]
 }

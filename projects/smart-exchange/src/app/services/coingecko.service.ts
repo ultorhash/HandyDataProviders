@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { toCamel } from 'snake-camel';
-import { CoingeckoDto, HistoricDataDto } from '../dtos';
-import { Intervals, Recaps } from '../enums';
-import { TimePrice } from '../types';
+import { CoinDto, OHLCPricesDto } from '../dtos';
+import { Recaps } from '../enums';
 import {
   map,
   mergeMap,
@@ -28,37 +27,36 @@ export class CoingeckoService {
   getCoinsData$(
     recap: Recaps = Recaps.USD,
     quantity: number = 50
-  ): Observable<CoingeckoDto[]> {
+  ): Observable<CoinDto[]> {
     return timer(0, 10000).pipe(
       mergeMap(() => {
-        return this.http.get<CoingeckoDto[]>(
+        return this.http.get<CoinDto[]>(
           `${this.API_URL}/markets?vs_currency=${recap}` +
           `&order=market_cap_desc&per_page=${quantity}`
         );
       }),
-      map((res: CoingeckoDto[]) => res.map(toCamel) as CoingeckoDto[])
+      map((res: CoinDto[]) => res.map(toCamel) as CoinDto[])
     )
   }
 
   /**
-   * Gets past prices for cryptocurrency.
+   * Gets past `OHLC` prices for cryptocurrency.
+   * `O` - Open.
+   * `H` - High.
+   * `L` - Low.
+   * `C` - Close.
    * @param name Name of cryptocurrency.
    * @param days Number of passed days.
-   * @param interval Data interval for prices. Default to `DAILY`.
    * @param recap Price comparison to fiat currency. Default to `USD`.
-   * @returns Array of tuples that contains day and price for cryptocurrency.
+   * @returns Array of tuples that contains day and `OHCL` prices for cryptocurrency.
    */
-  getCoinHistoricPrices$(
+  getCoinOhlcPrices$(
     name: string,
     days: number,
-    interval: Intervals = Intervals.DAILY,
     recap: Recaps = Recaps.USD
-  ): Observable<TimePrice[]> {
-    return this.http.get<HistoricDataDto>(
-      `${this.API_URL}/${name}/market_chart?vs_currency=` +
-      `${recap}&days=${days}&interval=${interval}`
-    ).pipe(
-      map((res: HistoricDataDto) => (toCamel(res) as HistoricDataDto).prices)
-    )
+  ): Observable<OHLCPricesDto[]> {
+    return this.http.get<OHLCPricesDto[]>(
+      `${this.API_URL}/${name}/ohlc?vs_currency=${recap}&days=${days}`
+    );
   }
 }

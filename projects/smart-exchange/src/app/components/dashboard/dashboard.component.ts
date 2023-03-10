@@ -7,8 +7,7 @@ import {
 } from 'ag-grid-community';
 import { GridsterConfig } from 'angular-gridster2';
 import { Observable, tap } from 'rxjs';
-import { CoingeckoDto } from '../../dtos';
-import { Intervals } from '../../enums';
+import { CoinDto, OHLCPricesDto } from '../../dtos';
 import { IPriceTable } from '../../interfaces';
 import { CoingeckoService } from '../../services';
 import {
@@ -38,24 +37,29 @@ export class DashboardComponent extends BasicChartComponent {
   public gridOptions: GridOptions = gridOptions;
   public gridsterOptions: GridsterConfig = gridsterOptions;
   public options: Highcharts.Options = {
-    rangeSelector: {
-      selected: 1
+    chart: {
+      backgroundColor: Colors.GRAY800
     },
-    navigator: {
-      series: {
-        color: 'red'
-      }
+    title: {
+      text: undefined
+    },
+    credits: {
+      enabled: false
+    },
+    xAxis: {
+      type: 'datetime',
+      gridLineColor: Colors.GRAY700,
+      gridLineWidth: 1
+    },
+    yAxis: {
+      title: undefined,
+      gridLineColor: Colors.GRAY700
     },
     series: [
       {
-        type: "hollowcandlestick",
-        data: [
-          [1521466200000, 177.32, 177.47, 173.66, 175.3],
-          [1521552600000, 175.24, 176.8, 174.94, 175.24],
-          [1521639000000, 175.04, 175.09, 171.26, 171.27],
-          [1521725400000, 170, 172.68, 168.6, 168.85]
-        ]
-      },
+        name: 'Bitcoin',
+        type: "hollowcandlestick"
+      }
     ]
   }
 
@@ -66,10 +70,10 @@ export class DashboardComponent extends BasicChartComponent {
     this.chartOptions = this.options;
   }
 
-  fetchData$(): Observable<CoingeckoDto[]> {
+  fetchData$(): Observable<CoinDto[]> {
     return this.coingeckoService.getCoinsData$().pipe(
-      tap((res: CoingeckoDto[]) => {
-        const priceData = res.reduce((acc: IPriceTable[], curr: CoingeckoDto) => {
+      tap((res: CoinDto[]) => {
+        const priceData = res.reduce((acc: IPriceTable[], curr: CoinDto) => {
           return [
             ...acc, {
               image: curr.image,
@@ -100,13 +104,13 @@ export class DashboardComponent extends BasicChartComponent {
   chartCallback: Highcharts.ChartCallbackFunction = (chart): void => {
     this.chart = chart;
 
-    this.coingeckoService.getCoinHistoricPrices$('bitcoin', 30, Intervals.HOURLY).pipe(
-      tap((res) => {
-        // for (let i = 0; i < res.length; i++) {
-        //   this.chart.series[0].addPoint(res[i], false);
-        // }
+    this.coingeckoService.getCoinOhlcPrices$('bitcoin', 30).pipe(
+      tap((res: OHLCPricesDto[]) => {
+        for (let i = 0; i < res.length; i++) {
+          this.chart.series[0].addPoint(res[i], false);
+        }
 
-        // this.chart.redraw();
+        this.chart.redraw();
       })
     )
     .subscribe();
