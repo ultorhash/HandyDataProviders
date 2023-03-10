@@ -29,7 +29,7 @@ export class CoingeckoService {
     recap: Recaps = Recaps.USD,
     quantity: number = 50
   ): Observable<CoingeckoDto[]> {
-    return timer(0, 5000).pipe(
+    return timer(0, 10000).pipe(
       mergeMap(() => {
         return this.http.get<CoingeckoDto[]>(
           `${this.API_URL}/markets?vs_currency=${recap}` +

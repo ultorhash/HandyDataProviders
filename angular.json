@@ -36,7 +36,11 @@
             "styles": [
               "projects/smart-exchange/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "highcharts",
+              "snake-camel"
+            ]
           },
           "configurations": {
             "production": {

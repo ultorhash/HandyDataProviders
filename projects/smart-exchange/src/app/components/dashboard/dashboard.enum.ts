@@ -12,7 +12,7 @@ export enum Cards {
  * Colors for programmatically settings. 
  */
 export enum Colors {
-  GRAY800 = '#262626',
+  GRAY800 = '#1F1F1F',
   BLUE800 = '#0C56BC',
   TRANSPARENT = 'transparent'
 }
