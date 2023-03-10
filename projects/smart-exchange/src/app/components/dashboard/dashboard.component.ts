@@ -17,7 +17,7 @@ import {
   gridOptions,
   gridsterOptions
 } from './dashboard.data';
-import { Cards, Colors } from './dashboard.enum';
+import { Cards } from './dashboard.enum';
 import { ExtendedGridsterItem } from './dashboard.interface';
 import { BasicChartComponent } from '../shared';
 
@@ -36,38 +36,12 @@ export class DashboardComponent extends BasicChartComponent {
   public defaultColDef: ColDef = defaultColDef;
   public gridOptions: GridOptions = gridOptions;
   public gridsterOptions: GridsterConfig = gridsterOptions;
-  public options: Highcharts.Options = {
-    chart: {
-      backgroundColor: Colors.GRAY800
-    },
-    title: {
-      text: undefined
-    },
-    credits: {
-      enabled: false
-    },
-    xAxis: {
-      type: 'datetime',
-      gridLineColor: Colors.GRAY700,
-      gridLineWidth: 1
-    },
-    yAxis: {
-      title: undefined,
-      gridLineColor: Colors.GRAY700
-    },
-    series: [
-      {
-        name: 'Bitcoin',
-        type: "hollowcandlestick"
-      }
-    ]
-  }
 
   public cards: typeof Cards = Cards;
 
   constructor(private coingeckoService: CoingeckoService) {
     super();
-    this.chartOptions = this.options;
+    this.chartOptions;
   }
 
   fetchData$(): Observable<CoinDto[]> {

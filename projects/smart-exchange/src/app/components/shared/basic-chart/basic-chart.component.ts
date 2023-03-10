@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Colors } from '../../../enums';
 
 import * as Highcharts from 'highcharts';
 import HCStockModule from 'highcharts/modules/stock';
@@ -22,7 +23,35 @@ HCTools(Highcharts);
 })
 export class BasicChartComponent {
   protected Highcharts: typeof Highcharts = Highcharts;
-  protected chartOptions: Highcharts.Options = {} as Highcharts.Options;
+  protected chartOptions: Highcharts.Options = {
+    chart: {
+      backgroundColor: Colors.GRAY800
+    },
+    title: {
+      text: undefined
+    },
+    credits: {
+      enabled: false
+    },
+    xAxis: {
+      type: 'datetime',
+      gridLineColor: Colors.GRAY700,
+      gridLineWidth: 1,
+    },
+    yAxis: {
+      title: undefined,
+      gridLineColor: Colors.GRAY700
+    },
+    legend: {
+      enabled: false
+    },
+    series: [
+      {
+        name: 'Bitcoin',
+        type: "hollowcandlestick"
+      }
+    ]
+  };
 
   constructor() {}
 }
