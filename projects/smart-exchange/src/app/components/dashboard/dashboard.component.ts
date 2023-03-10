@@ -41,7 +41,6 @@ export class DashboardComponent extends BasicChartComponent {
 
   constructor(private coingeckoService: CoingeckoService) {
     super();
-    this.chartOptions;
   }
 
   fetchData$(): Observable<CoinDto[]> {

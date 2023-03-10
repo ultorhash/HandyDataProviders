@@ -15,8 +15,11 @@ export const columnDefs: ColDef<IPriceTable>[] = [
     field: 'symbol',
     cellRenderer: (params: ValueFormatterParams<IPriceTable, string>) => {
       return `
-        <div class="cell__value-image">
-          <img src=${params.data?.image} alt=${params.value}>
+        <div class='cell__value-image'>
+          <img
+            src=${params.data?.image}
+            alt=${params.value}
+          />
           ${params.value}
         </div>
       `;

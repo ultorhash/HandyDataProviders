@@ -9,6 +9,8 @@ import HCHollowCandleStick from 'highcharts/modules/hollowcandlestick';
 import HCAccessibility from 'highcharts/modules/accessibility';
 import HCTools from 'highcharts/modules/stock-tools';
 
+Highcharts.AST.allowedAttributes.push('alt');
+
 HCStockModule(Highcharts);
 HCData(Highcharts);
 HCExporting(Highcharts);
@@ -28,7 +30,20 @@ export class BasicChartComponent {
       backgroundColor: Colors.GRAY800
     },
     title: {
-      text: undefined
+      useHTML: true,
+      text: `
+        <div class='chart__title'>
+          <img
+            src='https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579'
+            alt='BTC'
+          />
+          Bitcoin
+        </div>
+      `,
+      align: 'left',
+      style: {
+        color: Colors.WHITE
+      }
     },
     credits: {
       enabled: false
