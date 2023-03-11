@@ -1,1 +1,1 @@
-export * from './basic-entity.type';
+export * from './cryptocurrency-label.type';

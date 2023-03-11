@@ -21,7 +21,8 @@ import {
 import { Cards } from './dashboard.enum';
 import { ExtendedGridsterItem } from './dashboard.interface';
 import { BasicChartComponent } from '../shared';
-import { BasicEntity } from '../../types';
+import { CryptocurrencyLabel } from '../../types';
+import { getChartLabel } from '../../utils';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,9 +30,10 @@ import { BasicEntity } from '../../types';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent extends BasicChartComponent {
-  private readonly DEFAULT_CRYPTOCURRENCY: BasicEntity = {
+  private readonly DEFAULT_CRYPTOCURRENCY: CryptocurrencyLabel = {
     id: 'bitcoin',
-    name: 'Bitcoin'
+    name: 'Bitcoin',
+    image: 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579'
   };
 
   private chart: Highcharts.Chart = {} as Highcharts.Chart;
@@ -85,23 +87,43 @@ export class DashboardComponent extends BasicChartComponent {
 
   onRowClick(row: RowClickedEvent<IPriceTable>): void {
     if (row.data) {
-      const { id, name } = row.data;
-      this.updateChartData(id, name);
+      const { id, name, image } = row.data;
+
+      this.updateChartData({
+        id: id,
+        name: name,
+        image: image
+      });
     }
   }
 
   chartCallback: Highcharts.ChartCallbackFunction = (chart): void => {
+    const { id, name, image } = this.DEFAULT_CRYPTOCURRENCY;
     this.chart = chart;
 
-    const { id, name } = this.DEFAULT_CRYPTOCURRENCY;
-    this.updateChartData(id, name);
+    this.updateChartData({
+      id: id,
+      name: name,
+      image: image
+    });
   }
 
-  updateChartData(id: string, name: string): void {
+  updateChartData(label: CryptocurrencyLabel): void {
+    const { id, name, image } = label;
+
     this.coingeckoService.getCoinOhlcPrices$(id, 30).pipe(
       first(),
       tap((res: OHLCPricesDto[]) => {
         this.chart.series[0].setData(res, true);
+        this.chart.update({
+          title: {
+            text: getChartLabel({
+              id: id,
+              name: name,
+              image: image
+            })
+          }
+        })
       })
     )
     .subscribe();

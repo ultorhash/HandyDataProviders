@@ -34,15 +34,6 @@ export class BasicChartComponent {
     },
     title: {
       useHTML: true,
-      text: `
-        <div class='chart__title'>
-          <img
-            src='https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579'
-            alt='BTC'
-          />
-          Bitcoin
-        </div>
-      `,
       align: 'left',
       style: {
         color: Colors.WHITE

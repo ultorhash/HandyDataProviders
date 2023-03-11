@@ -1,7 +1,6 @@
-import { BasicEntity } from "../types";
+import { CryptocurrencyLabel } from "../types";
 
-export interface IPriceTable extends BasicEntity {
-  image: string;
+export interface IPriceTable extends CryptocurrencyLabel {
   symbol: string;
   change: number;
   percentageChange: number;
