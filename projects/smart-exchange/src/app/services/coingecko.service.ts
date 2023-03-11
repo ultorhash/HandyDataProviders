@@ -45,18 +45,18 @@ export class CoingeckoService {
    * `H` - High.
    * `L` - Low.
    * `C` - Close.
-   * @param name Name of cryptocurrency.
+   * @param id Id of cryptocurrency in `lowercase` format.
    * @param days Number of passed days.
    * @param recap Price comparison to fiat currency. Default to `USD`.
    * @returns Array of tuples that contains day and `OHCL` prices for cryptocurrency.
    */
   getCoinOhlcPrices$(
-    name: string,
+    id: string,
     days: number,
     recap: Recaps = Recaps.USD
   ): Observable<OHLCPricesDto[]> {
     return this.http.get<OHLCPricesDto[]>(
-      `${this.API_URL}/${name}/ohlc?vs_currency=${recap}&days=${days}`
+      `${this.API_URL}/${id}/ohlc?vs_currency=${recap}&days=${days}`
     );
   }
 }

@@ -3,10 +3,11 @@ import {
   ColDef,
   GridApi,
   GridOptions,
-  GridReadyEvent
+  GridReadyEvent,
+  RowClickedEvent
 } from 'ag-grid-community';
 import { GridsterConfig } from 'angular-gridster2';
-import { Observable, tap } from 'rxjs';
+import { Observable, tap, first } from 'rxjs';
 import { CoinDto, OHLCPricesDto } from '../../dtos';
 import { IPriceTable } from '../../interfaces';
 import { CoingeckoService } from '../../services';
@@ -20,6 +21,7 @@ import {
 import { Cards } from './dashboard.enum';
 import { ExtendedGridsterItem } from './dashboard.interface';
 import { BasicChartComponent } from '../shared';
+import { BasicEntity } from '../../types';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,6 +29,11 @@ import { BasicChartComponent } from '../shared';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent extends BasicChartComponent {
+  private readonly DEFAULT_CRYPTOCURRENCY: BasicEntity = {
+    id: 'bitcoin',
+    name: 'Bitcoin'
+  };
+
   private chart: Highcharts.Chart = {} as Highcharts.Chart;
   private gridApi: GridApi = {} as GridApi;
 
@@ -43,12 +50,14 @@ export class DashboardComponent extends BasicChartComponent {
     super();
   }
 
-  fetchData$(): Observable<CoinDto[]> {
+  fetchTableData$(): Observable<CoinDto[]> {
     return this.coingeckoService.getCoinsData$().pipe(
       tap((res: CoinDto[]) => {
         const priceData = res.reduce((acc: IPriceTable[], curr: CoinDto) => {
           return [
             ...acc, {
+              id: curr.id,
+              name: curr.name,
               image: curr.image,
               symbol: curr.symbol.toUpperCase(),
               change: curr.priceChange24h,
@@ -71,19 +80,28 @@ export class DashboardComponent extends BasicChartComponent {
 
   onPriceTableReady(event: GridReadyEvent): void {
     this.gridApi = event.api;
-    this.fetchData$().subscribe();
+    this.fetchTableData$().subscribe();
+  }
+
+  onRowClick(row: RowClickedEvent<IPriceTable>): void {
+    if (row.data) {
+      const { id, name } = row.data;
+      this.updateChartData(id, name);
+    }
   }
 
   chartCallback: Highcharts.ChartCallbackFunction = (chart): void => {
     this.chart = chart;
 
-    this.coingeckoService.getCoinOhlcPrices$('bitcoin', 30).pipe(
-      tap((res: OHLCPricesDto[]) => {
-        for (let i = 0; i < res.length; i++) {
-          this.chart.series[0].addPoint(res[i], false);
-        }
+    const { id, name } = this.DEFAULT_CRYPTOCURRENCY;
+    this.updateChartData(id, name);
+  }
 
-        this.chart.redraw();
+  updateChartData(id: string, name: string): void {
+    this.coingeckoService.getCoinOhlcPrices$(id, 30).pipe(
+      first(),
+      tap((res: OHLCPricesDto[]) => {
+        this.chart.series[0].setData(res, true);
       })
     )
     .subscribe();

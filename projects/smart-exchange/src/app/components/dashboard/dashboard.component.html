@@ -37,6 +37,7 @@
         [rowDragManaged]="true"
         [animateRows]="true"
         (gridReady)="onPriceTableReady($event)"
+        (rowClicked)="onRowClick($event)"
       >
       </ag-grid-angular>
     </div>

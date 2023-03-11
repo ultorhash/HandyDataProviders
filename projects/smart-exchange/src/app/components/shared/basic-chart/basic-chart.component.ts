@@ -27,7 +27,10 @@ export class BasicChartComponent {
   protected Highcharts: typeof Highcharts = Highcharts;
   protected chartOptions: Highcharts.Options = {
     chart: {
-      backgroundColor: Colors.GRAY800
+      backgroundColor: Colors.GRAY800,
+      zooming: {
+        type: 'xy'
+      }
     },
     title: {
       useHTML: true,
@@ -44,6 +47,36 @@ export class BasicChartComponent {
       style: {
         color: Colors.WHITE
       }
+    },
+    rangeSelector: {
+      enabled: true,
+      allButtonsEnabled: true,
+      buttons: [
+        {
+          type: 'hour',
+          count: 1,
+          text: 'Hour'
+        },
+        {
+          type: 'day',
+          count: 1,
+          text: 'Day'
+        },
+        {
+          type: 'week',
+          count: 7,
+          text: 'Week'
+        },
+        {
+          type: 'month',
+          count: 1,
+          text: 'Month'
+        }
+      ],
+      buttonTheme: {
+        width: 60
+      },
+      selected: 2
     },
     credits: {
       enabled: false
