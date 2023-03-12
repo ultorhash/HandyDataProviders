@@ -8,7 +8,7 @@ import {
 } from 'ag-grid-community';
 import { Select } from '@ngxs/store';
 import { GridsterConfig } from 'angular-gridster2';
-import { Observable, tap, first } from 'rxjs';
+import { Observable, tap, first, filter } from 'rxjs';
 import { CoinDto, OHLCPricesDto } from '../../dtos';
 import { IPriceTable } from '../../interfaces';
 import { CoingeckoService } from '../../services';
@@ -33,12 +33,6 @@ import { CoinsState, CoinsStateModel } from '../../store';
 })
 export class DashboardComponent extends BasicChartComponent {
   @Select(CoinsState) coins$!: Observable<CoinsStateModel>;
-
-  private readonly DEFAULT_CRYPTOCURRENCY: CryptocurrencyLabel = {
-    id: 'bitcoin',
-    name: 'Bitcoin',
-    image: 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579'
-  };
 
   private chart: Highcharts.Chart = {} as Highcharts.Chart;
   private gridApi: GridApi = {} as GridApi;
@@ -102,14 +96,20 @@ export class DashboardComponent extends BasicChartComponent {
   }
 
   chartCallback: Highcharts.ChartCallbackFunction = (chart): void => {
-    const { id, name, image } = this.DEFAULT_CRYPTOCURRENCY;
     this.chart = chart;
 
-    this.updateChartData({
-      id: id,
-      name: name,
-      image: image
-    });
+    this.coins$.pipe(
+      filter((res: CoinsStateModel) => res.coins.length > 0),
+      first(),
+      tap((res: CoinsStateModel) => {
+        this.updateChartData({
+          id: res.coins[0].id,
+          name: res.coins[0].name,
+          image: res.coins[0].image
+        });
+      })
+    )
+    .subscribe();
   }
 
   updateChartData(label: CryptocurrencyLabel): void {
