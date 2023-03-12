@@ -115,6 +115,7 @@ export class DashboardComponent extends BasicChartComponent {
       first(),
       tap((res: OHLCPricesDto[]) => {
         this.chart.series[0].setData(res, true);
+        this.chart.series[0].name = name;
         this.chart.update({
           title: {
             text: getChartLabel({

@@ -79,6 +79,11 @@ highcharts-chart {
     height: $chart-title-icon-size;
   }
 }
+
+.highcharts-menu {
+  box-shadow: none !important;
+  padding: 0 !important;
+}
 /* endregion highcharts */
 
 /* region gridster */

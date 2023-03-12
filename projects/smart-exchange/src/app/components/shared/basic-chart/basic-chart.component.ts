@@ -39,35 +39,83 @@ export class BasicChartComponent {
         color: Colors.WHITE
       }
     },
+    navigator: {
+      enabled: true,
+      series: {
+        lineColor: Colors.BLUE800,
+        fillColor: Colors.TRANSPARENT
+      },
+      maskFill: Colors.TRANSPARENT
+    },
+    navigation: {
+      menuStyle: {
+        backgroundColor: Colors.GRAY700
+      },
+      menuItemStyle: {
+        color: Colors.WHITE,
+        backgroundColor: Colors.GRAY700,
+        fontFamily: 'sans-serif'
+      },
+      menuItemHoverStyle: {
+        backgroundColor: Colors.BLUE800
+      }
+    },
+    exporting: {
+      buttons: {
+        contextButton: {
+          theme: {
+            fill: Colors.GRAY700
+          }
+        }
+      }
+    },
     rangeSelector: {
       enabled: true,
       allButtonsEnabled: true,
+      labelStyle: {
+        display: 'none'
+      },
+      inputEnabled: false,
+      buttonTheme: {
+        width: 40,
+        fill: Colors.GRAY700,
+        style: {
+          color: Colors.WHITE
+        }
+      },
+      buttonPosition: {
+        align: 'left',
+        x: -20
+      },
       buttons: [
         {
           type: 'hour',
           count: 1,
-          text: 'Hour'
+          text: '1H'
         },
         {
           type: 'day',
           count: 1,
-          text: 'Day'
+          text: '1D'
         },
         {
           type: 'week',
-          count: 7,
-          text: 'Week'
+          count: 1,
+          text: '1W'
         },
         {
           type: 'month',
           count: 1,
-          text: 'Month'
+          text: '1M'
         }
-      ],
-      buttonTheme: {
-        width: 60
-      },
-      selected: 2
+      ]
+    },
+    tooltip: {
+      backgroundColor: Colors.GRAY800,
+      borderColor: Colors.BLUE800,
+      style: {
+        color: Colors.WHITE
+      }
     },
     credits: {
       enabled: false
@@ -75,7 +123,7 @@ export class BasicChartComponent {
     xAxis: {
       type: 'datetime',
       gridLineColor: Colors.GRAY700,
-      gridLineWidth: 1,
+      gridLineWidth: 1
     },
     yAxis: {
       title: undefined,
