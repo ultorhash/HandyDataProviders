@@ -6,6 +6,7 @@ import {
   GridReadyEvent,
   RowClickedEvent
 } from 'ag-grid-community';
+import { Select } from '@ngxs/store';
 import { GridsterConfig } from 'angular-gridster2';
 import { Observable, tap, first } from 'rxjs';
 import { CoinDto, OHLCPricesDto } from '../../dtos';
@@ -23,6 +24,7 @@ import { ExtendedGridsterItem } from './dashboard.interface';
 import { BasicChartComponent } from '../shared';
 import { CryptocurrencyLabel } from '../../types';
 import { getChartLabel } from '../../utils';
+import { CoinsState, CoinsStateModel } from '../../store';
 
 @Component({
   selector: 'app-dashboard',
@@ -30,6 +32,8 @@ import { getChartLabel } from '../../utils';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent extends BasicChartComponent {
+  @Select(CoinsState) coins$!: Observable<CoinsStateModel>;
+
   private readonly DEFAULT_CRYPTOCURRENCY: CryptocurrencyLabel = {
     id: 'bitcoin',
     name: 'Bitcoin',
@@ -52,10 +56,10 @@ export class DashboardComponent extends BasicChartComponent {
     super();
   }
 
-  fetchTableData$(): Observable<CoinDto[]> {
-    return this.coingeckoService.getCoinsData$().pipe(
-      tap((res: CoinDto[]) => {
-        const priceData = res.reduce((acc: IPriceTable[], curr: CoinDto) => {
+  updateTableData$(): Observable<CoinsStateModel> {
+    return this.coins$.pipe(
+      tap((state: CoinsStateModel) => {
+        const priceData = state.coins.reduce((acc: IPriceTable[], curr: CoinDto) => {
           return [
             ...acc, {
               id: curr.id,
@@ -82,7 +86,7 @@ export class DashboardComponent extends BasicChartComponent {
 
   onPriceTableReady(event: GridReadyEvent): void {
     this.gridApi = event.api;
-    this.fetchTableData$().subscribe();
+    this.updateTableData$().subscribe();
   }
 
   onRowClick(row: RowClickedEvent<IPriceTable>): void {

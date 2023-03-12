@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxsModule } from '@ngxs/store';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -20,6 +21,7 @@ import {
   DashboardComponent
 } from './components';
 import { BasicChartComponent } from './components/shared';
+import { CoinsState } from './store';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,9 @@ import { BasicChartComponent } from './components/shared';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
+    NgxsModule.forRoot([
+      CoinsState
+    ]),
     MatSnackBarModule,
     MatButtonModule,
     MatGridListModule,

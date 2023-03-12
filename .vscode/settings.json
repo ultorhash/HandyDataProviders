@@ -1,10 +1,12 @@
 {
   "cSpell.words": [
     "datetime",
+    "dtos",
     "endregion",
     "gridster",
     "Highcharts",
     "hollowcandlestick",
+    "ngxs",
     "OHLC"
   ]
 }
