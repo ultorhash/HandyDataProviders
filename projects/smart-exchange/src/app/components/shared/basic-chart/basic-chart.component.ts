@@ -30,6 +30,9 @@ export class BasicChartComponent {
       backgroundColor: Colors.GRAY800,
       zooming: {
         type: 'xy'
+      },
+      style: {
+        cursor: 'crosshair'
       }
     },
     title: {
@@ -134,8 +137,7 @@ export class BasicChartComponent {
     },
     series: [
       {
-        name: 'Bitcoin',
-        type: "hollowcandlestick"
+        type: 'hollowcandlestick'
       }
     ]
   };
