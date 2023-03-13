@@ -4,16 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxsModule } from '@ngxs/store';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatCardModule } from '@angular/material/card';
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { AppRoutingModule } from './app-routing.module';
-import { AgGridModule } from 'ag-grid-angular';
-import { GridsterModule } from 'angular-gridster2';
-import { HighchartsChartModule } from 'highcharts-angular';
 import { UiCoreModule } from 'ui-core';
+import {
+  LibraryModule,
+  MaterialModule,
+  RoutingModule
+} from './modules';
 
 import { AppComponent } from './app.component';
 import {
@@ -34,19 +30,13 @@ import { CoinsState } from './store';
     CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
+    RoutingModule,
+    MaterialModule,
+    LibraryModule,
     HttpClientModule,
     NgxsModule.forRoot([
       CoinsState
     ]),
-    MatSnackBarModule,
-    MatButtonModule,
-    MatGridListModule,
-    MatCardModule,
-    DragDropModule,
-    AgGridModule,
-    GridsterModule,
-    HighchartsChartModule,
     UiCoreModule
   ],
   providers: [],

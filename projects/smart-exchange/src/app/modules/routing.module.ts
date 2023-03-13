@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {
   DashboardComponent, 
   HomeComponent
-} from './components';
+} from '../components';
 
 const routes: Routes = [
   {
@@ -20,4 +20,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class RoutingModule {}

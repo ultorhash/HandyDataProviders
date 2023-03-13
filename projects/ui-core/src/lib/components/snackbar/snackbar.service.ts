@@ -11,7 +11,7 @@ export class SnackbarService {
   constructor(private snackbar: MatSnackBar) {}
 
   open(config: ISnackbarData): MatSnackBarRef<SnackbarComponent> {
-    const { message, duration, type, action } = config
+    const { message, duration, type, action } = config;
 
     return this.snackbar.openFromComponent<SnackbarComponent, ISnackbarData>(SnackbarComponent, {
       duration: duration,
