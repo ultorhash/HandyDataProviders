@@ -11,35 +11,58 @@
   >
     <div
       *ngSwitchCase="cards.Chart"
-      class="card"
+      class="grid-item__content"
     >
-      <highcharts-chart
-        class="card-content"
-        [Highcharts]="Highcharts"
-        [options]="chartOptions"
-        [callbackFunction]="chartCallback"
-      >
-      </highcharts-chart>
+      <div class="tile">
+        <div class="tile-header">
+          <button
+            mat-icon-button
+            class="icon-button__small pin-button"
+          >
+            <mat-icon class="icon">push_pin</mat-icon>
+          </button>
+        </div>
+        <div class="tile-content">
+          <highcharts-chart
+            [Highcharts]="Highcharts"
+            [options]="chartOptions"
+            [callbackFunction]="chartCallback"
+          >
+          </highcharts-chart>
+        </div>
+      </div>
     </div>
     <div
       *ngSwitchCase="cards.PriceTable"
-      class="card"
+      class="grid-item__content"
     >
-      <ag-grid-angular
-        class="ag-theme-alpine card-content"
-        rowSelection="multiple"
-        [columnDefs]="columnDefs"
-        [defaultColDef]="defaultColDef"
-        [gridOptions]="gridOptions"
-        [rowData]="rowData"
-        [rowDragEntireRow]="true"
-        [rowDragMultiRow]="true"
-        [rowDragManaged]="true"
-        [animateRows]="true"
-        (gridReady)="onPriceTableReady($event)"
-        (rowClicked)="onRowClick($event)"
-      >
-      </ag-grid-angular>
+      <div class="tile">
+        <div class="tile-header">
+          <button
+            mat-icon-button
+            class="icon-button__small pin-button"
+          >
+            <mat-icon class="icon">push_pin</mat-icon>
+          </button>
+        </div>
+        <div class="tile-content">
+          <ag-grid-angular
+            class="ag-theme-alpine"
+            rowSelection="multiple"
+            [columnDefs]="columnDefs"
+            [defaultColDef]="defaultColDef"
+            [gridOptions]="gridOptions"
+            [rowData]="rowData"
+            [rowDragEntireRow]="true"
+            [rowDragMultiRow]="true"
+            [rowDragManaged]="true"
+            [animateRows]="true"
+            (gridReady)="onPriceTableReady($event)"
+            (rowClicked)="onRowClick($event)"
+          >
+          </ag-grid-angular>
+        </div>
+      </div>
     </div>
     <div *ngSwitchCase="cards.Summary">
       <button

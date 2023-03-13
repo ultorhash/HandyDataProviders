@@ -3,9 +3,12 @@
   height: 100%;
 }
 
-@mixin content-center-start($gap) {
+@mixin content-center(
+  $justify-content: flex-start,
+  $gap: 8px
+) {
   display: flex;
-  justify-content: flex-start;
+  justify-content: $justify-content;
   align-items: center;
   gap: $gap;
 }

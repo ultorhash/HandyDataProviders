@@ -55,7 +55,7 @@ ag-grid-angular {
 }
 
 .cell__value-image {
-  @include content-center-start(8px);
+  @include content-center();
 
   img {
     width: $table-cell-icon-size;
@@ -72,7 +72,7 @@ highcharts-chart {
 }
 
 .chart__title {
-  @include content-center-start(8px);
+  @include content-center();
 
   img {
     width: $chart-title-icon-size;
@@ -90,8 +90,23 @@ highcharts-chart {
 gridster .gridster-column {
   border-color: $gray800 !important;
 }
+
 gridster .gridster-row {
   border-color: $gray800 !important;
+}
+
+.gridster-item-resizable-handler.handle-n,
+.gridster-item-resizable-handler.handle-s {
+  height: 5px !important;
+}
+
+.gridster-item-resizable-handler.handle-w,
+.gridster-item-resizable-handler.handle-e {
+  width: 5px !important;
+}
+
+.grid-item__content {
+  @include full-size;
 }
 /* endregion gridster */
 

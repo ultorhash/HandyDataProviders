@@ -72,7 +72,7 @@ export const gridsterOptions: GridsterConfig = {
   },
   draggable: {
     enabled: true,
-    ignoreContentClass: 'card-content',
+    ignoreContentClass: 'grid-item__content',
   },
   gridType: 'fit',
   displayGrid: 'always'
