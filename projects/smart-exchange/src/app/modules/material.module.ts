@@ -3,6 +3,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
@@ -11,6 +12,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatButtonModule,
     MatGridListModule,
     MatCardModule,
+    MatIconModule,
     DragDropModule
   ]
 })
