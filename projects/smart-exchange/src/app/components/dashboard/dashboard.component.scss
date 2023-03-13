@@ -1,5 +1,6 @@
 @import '../../../styles/colors.scss';
 @import '../../../styles/mixins.scss';
+@import '../../../../../ui-core/styles/button.scss';
 
 .grid {
   background-color: $gray900;
@@ -12,4 +13,13 @@
 
 .card {
   @include full-size;
+}
+
+.pin-button {
+  color: $gray700;
+  transition: 0.1s color ease-in-out;
+
+  &:hover {
+    color: $blue800;
+  }
 }

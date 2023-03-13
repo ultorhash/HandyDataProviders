@@ -42,7 +42,12 @@
       </ag-grid-angular>
     </div>
     <div *ngSwitchCase="cards.Summary">
-      
+      <button
+        mat-icon-button
+        class="icon-button__small pin-button"
+      >
+        <mat-icon class="icon">push_pin</mat-icon>
+      </button>
     </div>
     <div *ngSwitchDefault>
       {{ item.id }}

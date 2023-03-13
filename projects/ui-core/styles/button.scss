@@ -1,0 +1,19 @@
+/** General specification for different buttons */
+
+::ng-deep .icon-button__small.mat-mdc-icon-button {
+  border-radius: 0;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+
+  .icon {
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+  }
+
+  .mat-mdc-button-touch-target {
+    width: 20px;
+    height: 20px;
+  }
+}
