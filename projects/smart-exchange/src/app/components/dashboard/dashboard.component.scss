@@ -11,6 +11,7 @@ $tile-header-height: 20px;
 .grid-item {
   background-color: $gray800;
   padding: 15px;
+  cursor: grab;
 }
 
 .tile {

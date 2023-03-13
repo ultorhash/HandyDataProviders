@@ -107,6 +107,7 @@ gridster .gridster-row {
 
 .grid-item__content {
   @include full-size;
+  cursor: default;
 }
 /* endregion gridster */
 
