@@ -27,7 +27,7 @@ export class BasicChartComponent {
   protected Highcharts: typeof Highcharts = Highcharts;
   protected chartOptions: Highcharts.Options = {
     chart: {
-      backgroundColor: Colors.GRAY800,
+      backgroundColor: Colors.TRANSPARENT,
       zooming: {
         type: 'xy'
       },

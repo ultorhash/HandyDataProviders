@@ -104,11 +104,6 @@ gridster .gridster-row {
 .gridster-item-resizable-handler.handle-e {
   width: 5px !important;
 }
-
-.grid-item__content {
-  @include full-size;
-  cursor: default;
-}
 /* endregion gridster */
 
 /* #region scroll bars */
