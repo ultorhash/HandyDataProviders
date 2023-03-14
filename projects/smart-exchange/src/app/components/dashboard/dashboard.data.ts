@@ -84,27 +84,35 @@ export const dashboard: ExtendedGridsterItem[] = [
     cols: 10,
     rows: 1,
     y: 0,
-    x: 0
+    x: 0,
+    dragEnabled: true,
+    resizeEnabled: true
   },
   {
     id: Cards.Chart,
     cols: 7,
     rows: 10,
     y: 1,
-    x: 0
+    x: 0,
+    dragEnabled: true,
+    resizeEnabled: true
   },
   {
     id: Cards.PriceTable,
     cols: 3,
     rows: 6,
     y: 1,
-    x: 7
+    x: 7,
+    dragEnabled: true,
+    resizeEnabled: true
   },
   {
     id: Cards.Summary,
     cols: 3,
     rows: 4,
     y: 7,
-    x: 7
+    x: 7,
+    dragEnabled: true,
+    resizeEnabled: true
   }
 ];

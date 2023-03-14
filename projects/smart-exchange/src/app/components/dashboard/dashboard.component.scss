@@ -30,10 +30,10 @@ $tile-header-height: 20px;
   height: calc(100% - $tile-header-height);
 }
 
-.pin-button {
-  color: $gray700;
+.pinned {
+  color: $blue700;
+}
 
-  &:hover {
-    color: $blue700;
-  }
+.unpinned {
+  color: $gray700;
 }

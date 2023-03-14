@@ -16,8 +16,11 @@
       <div class="tile">
         <div class="tile-header">
           <button
+            disableRipple
             mat-icon-button
-            class="icon-button__small pin-button"
+            class="icon-button__small"
+            [ngClass]="item.dragEnabled ? 'unpinned' : 'pinned'"
+            (click)="onPin(item)"
           >
             <mat-icon class="icon">push_pin</mat-icon>
           </button>

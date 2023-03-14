@@ -112,6 +112,14 @@ export class DashboardComponent extends BasicChartComponent {
     .subscribe();
   }
 
+  onPin(item: ExtendedGridsterItem): void {
+    item.dragEnabled = !item.dragEnabled;
+
+    if (this.gridsterOptions.api && this.gridsterOptions.api.optionsChanged) {
+      this.gridsterOptions.api.optionsChanged();
+    }
+  }
+
   updateChartData(label: CryptocurrencyLabel): void {
     const { id, name, image } = label;
 
