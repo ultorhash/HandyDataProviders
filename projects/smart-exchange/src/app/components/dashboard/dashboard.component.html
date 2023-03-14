@@ -6,6 +6,63 @@
     *ngFor="let item of dashboard"
     class="grid-item"
     [item]="item"
+    (itemResize)="onResize(item)"
+  >
+    <mat-card>
+      <mat-card-header>
+        <button
+          disableRipple
+          mat-icon-button
+          class="icon-button__small"
+          [ngClass]="item.dragEnabled ? 'unpinned' : 'pinned'"
+          (click)="onPin(item)"
+        >
+          <mat-icon class="icon">push_pin</mat-icon>
+        </button>
+      </mat-card-header>
+      <mat-card-content
+        [ngSwitch]="item.id"
+        class="card-content"
+      >
+        <highcharts-chart
+          *ngSwitchCase="cards.Chart"
+          [Highcharts]="Highcharts"
+          [options]="chartOptions"
+          [callbackFunction]="chartCallback"
+        >
+        </highcharts-chart>
+        <ag-grid-angular
+          *ngSwitchCase="cards.PriceTable"
+          class="ag-theme-alpine"
+          rowSelection="multiple"
+          [columnDefs]="columnDefs"
+          [defaultColDef]="defaultColDef"
+          [gridOptions]="gridOptions"
+          [rowData]="rowData"
+          [rowDragEntireRow]="true"
+          [rowDragMultiRow]="true"
+          [rowDragManaged]="true"
+          [animateRows]="true"
+          (gridReady)="onPriceTableReady($event)"
+          (rowClicked)="onRowClick($event)"
+        >
+        </ag-grid-angular>
+        <div *ngSwitchDefault>
+          {{ item.id }}
+        </div>
+      </mat-card-content>
+    </mat-card>  
+  </gridster-item>
+</gridster>
+
+<!-- <gridster
+  class="grid"
+  [options]="gridsterOptions"
+>
+  <gridster-item
+    *ngFor="let item of dashboard"
+    class="grid-item"
+    [item]="item"
     [ngSwitch]="item.id"
     (itemResize)="onResize(item)"
   >
@@ -79,4 +136,4 @@
       {{ item.id }}
     </div>
   </gridster-item>
-</gridster>
+</gridster> -->
