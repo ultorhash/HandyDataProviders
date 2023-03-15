@@ -22,7 +22,7 @@ import {
 import { Cards } from './dashboard.enum';
 import { ExtendedGridsterItem } from './dashboard.interface';
 import { BasicChartComponent } from '../shared';
-import { CryptocurrencyLabel } from '../../types';
+import { CoinLabel } from '../../types';
 import { getChartLabel } from '../../utils';
 import { CoinsState, CoinsStateModel } from '../../store';
 
@@ -120,7 +120,7 @@ export class DashboardComponent extends BasicChartComponent {
     .subscribe();
   }
 
-  updateChart(label: CryptocurrencyLabel): void {
+  updateChart(label: CoinLabel): void {
     const { id, name, image } = label;
 
     this.coingeckoService.getCoinOhlcPrices$(id, 30).pipe(

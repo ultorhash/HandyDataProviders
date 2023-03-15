@@ -1,11 +1,11 @@
-import { CryptocurrencyLabel } from "../types";
+import { CoinLabel } from "../types";
 
 /**
  * Generates chart title template.
  * @param label Cryptocurrency description.
  * @returns `HTML` element with configured title.
  */
-export const getChartLabel = (label: CryptocurrencyLabel): string => {
+export const getChartLabel = (label: CoinLabel): string => {
   return `
     <div class=chart__title>
       <img
