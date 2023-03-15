@@ -50,7 +50,7 @@ export class DashboardComponent extends BasicChartComponent {
     super();
   }
 
-  updateTableData$(): Observable<CoinsStateModel> {
+  updateTable$(): Observable<CoinsStateModel> {
     return this.coins$.pipe(
       tap((state: CoinsStateModel) => {
         const priceData = state.coins.reduce((acc: IPriceTable[], curr: CoinDto) => {
@@ -80,36 +80,19 @@ export class DashboardComponent extends BasicChartComponent {
 
   onPriceTableReady(event: GridReadyEvent): void {
     this.gridApi = event.api;
-    this.updateTableData$().subscribe();
+    this.updateTable$().subscribe();
   }
 
   onRowClick(row: RowClickedEvent<IPriceTable>): void {
     if (row.data) {
       const { id, name, image } = row.data;
 
-      this.updateChartData({
+      this.updateChart({
         id: id,
         name: name,
         image: image
       });
     }
-  }
-
-  chartCallback: Highcharts.ChartCallbackFunction = (chart): void => {
-    this.chart = chart;
-
-    this.coins$.pipe(
-      filter((res: CoinsStateModel) => res.coins.length > 0),
-      first(),
-      tap((res: CoinsStateModel) => {
-        this.updateChartData({
-          id: res.coins[0].id,
-          name: res.coins[0].name,
-          image: res.coins[0].image
-        });
-      })
-    )
-    .subscribe();
   }
 
   onPin(item: ExtendedGridsterItem): void {
@@ -120,7 +103,24 @@ export class DashboardComponent extends BasicChartComponent {
     }
   }
 
-  updateChartData(label: CryptocurrencyLabel): void {
+  chartCallback: Highcharts.ChartCallbackFunction = (chart): void => {
+    this.chart = chart;
+
+    this.coins$.pipe(
+      filter((res: CoinsStateModel) => res.coins.length > 0),
+      first(),
+      tap((res: CoinsStateModel) => {
+        this.updateChart({
+          id: res.coins[0].id,
+          name: res.coins[0].name,
+          image: res.coins[0].image
+        });
+      })
+    )
+    .subscribe();
+  }
+
+  updateChart(label: CryptocurrencyLabel): void {
     const { id, name, image } = label;
 
     this.coingeckoService.getCoinOhlcPrices$(id, 30).pipe(
