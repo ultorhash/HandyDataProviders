@@ -1,9 +1,9 @@
 import { CoinDto } from "../dtos";
 
 /**
- * Extracts cryptocurrency statistics from `CoinDto`.
+ * Contains cryptocurrency statistics from `CoinDto`.
  */
-export type CoinKeyStats = Pick<CoinDto,
+export type CoinStats = Pick<CoinDto,
   'marketCapRank' |
   'circulatingSupply' |
   'marketCap' |

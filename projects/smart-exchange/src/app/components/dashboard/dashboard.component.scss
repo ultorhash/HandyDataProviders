@@ -36,4 +36,15 @@ mat-card-header {
 mat-card-content {
   @include full-size;
   padding: 0;
+  overflow-y: auto;
+}
+
+mat-list {
+  border: 1px solid red;
+  padding: 0;
+}
+
+mat-list-item {
+  padding: 0;
+  border: 1px solid limegreen;
 }

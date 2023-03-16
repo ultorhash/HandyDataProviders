@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Observable, tap, first, filter } from 'rxjs';
 import {
   ColDef,
   GridApi,
@@ -8,7 +9,6 @@ import {
 } from 'ag-grid-community';
 import { Select } from '@ngxs/store';
 import { GridsterConfig } from 'angular-gridster2';
-import { Observable, tap, first, filter } from 'rxjs';
 import { CoinDto, OHLCPricesDto } from '../../dtos';
 import { IPriceTable } from '../../interfaces';
 import { CoingeckoService } from '../../services';
@@ -19,11 +19,16 @@ import {
   gridOptions,
   gridsterOptions
 } from './dashboard.data';
+import {
+  ensure,
+  getChartLabel,
+  TextFormatter,
+  unionToArray
+} from '../../utils';
 import { Cards } from './dashboard.enum';
 import { ExtendedGridsterItem } from './dashboard.interface';
 import { BasicChartComponent } from '../shared';
-import { CoinLabel } from '../../types';
-import { getChartLabel } from '../../utils';
+import { CoinStats, CoinLabel } from '../../types';
 import { CoinsState, CoinsStateModel } from '../../store';
 
 @Component({
@@ -43,6 +48,7 @@ export class DashboardComponent extends BasicChartComponent {
   public defaultColDef: ColDef = defaultColDef;
   public gridOptions: GridOptions = gridOptions;
   public gridsterOptions: GridsterConfig = gridsterOptions;
+  public coinStats: Map<string, number> = new Map<string, number>();
 
   public cards: typeof Cards = Cards;
 
@@ -87,7 +93,7 @@ export class DashboardComponent extends BasicChartComponent {
     if (row.data) {
       const { id, name, image } = row.data;
 
-      this.updateChart({
+      this.updateCoinData({
         id: id,
         name: name,
         image: image
@@ -109,18 +115,18 @@ export class DashboardComponent extends BasicChartComponent {
     this.coins$.pipe(
       filter((res: CoinsStateModel) => res.coins.length > 0),
       first(),
-      tap((res: CoinsStateModel) => {
-        this.updateChart({
-          id: res.coins[0].id,
-          name: res.coins[0].name,
-          image: res.coins[0].image
+      tap(({ coins }: CoinsStateModel) => {
+        this.updateCoinData({
+          id: coins[0].id,
+          name: coins[0].name,
+          image: coins[0].image
         });
       })
     )
     .subscribe();
   }
 
-  updateChart(label: CoinLabel): void {
+  updateCoinData(label: CoinLabel): void {
     const { id, name, image } = label;
 
     this.coingeckoService.getCoinOhlcPrices$(id, 30).pipe(
@@ -139,6 +145,17 @@ export class DashboardComponent extends BasicChartComponent {
         })
       })
     )
-    .subscribe();
+    //.subscribe();
+
+    this.coins$.pipe(
+      tap(({ coins }: CoinsStateModel) => {
+        const selected = ensure<CoinDto>(coins.find((c: CoinDto) => c.id === id));
+        const stats = unionToArray<keyof CoinStats>()('marketCapRank', 'marketCap', 'circulatingSupply', 'totalSupply', 'totalVolume');
+
+        stats.forEach((name: string) => {
+          this.coinStats.set(name, selected[name as keyof CoinDto] as number);
+        });
+      })
+    ).subscribe();
   }
 }
