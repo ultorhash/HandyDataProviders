@@ -6,6 +6,8 @@ import {
 } from "ag-grid-community";
 import { GridsterConfig } from "angular-gridster2";
 import { IPriceTable } from "../../interfaces";
+import { CoinStats } from "../../types";
+import { unionToArray } from "../../utils";
 import { Cards } from "./dashboard.enum";
 import { ExtendedGridsterItem } from "./dashboard.interface";
 
@@ -116,3 +118,11 @@ export const dashboard: ExtendedGridsterItem[] = [
     resizeEnabled: true
   }
 ];
+
+export const coinStatsNames = unionToArray<keyof CoinStats>()(
+  'marketCapRank',
+  'marketCap',
+  'circulatingSupply',
+  'totalSupply',
+  'totalVolume'
+);

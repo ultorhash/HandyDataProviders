@@ -13,6 +13,7 @@ import { CoinDto, OHLCPricesDto } from '../../dtos';
 import { IPriceTable } from '../../interfaces';
 import { CoingeckoService } from '../../services';
 import {
+  coinStatsNames,
   columnDefs,
   dashboard,
   defaultColDef,
@@ -22,13 +23,12 @@ import {
 import {
   ensure,
   getChartLabel,
-  TextFormatter,
-  unionToArray
+  TextFormatter
 } from '../../utils';
 import { Cards } from './dashboard.enum';
 import { ExtendedGridsterItem } from './dashboard.interface';
 import { BasicChartComponent } from '../shared';
-import { CoinStats, CoinLabel } from '../../types';
+import { CoinLabel } from '../../types';
 import { CoinsState, CoinsStateModel } from '../../store';
 
 @Component({
@@ -45,6 +45,7 @@ export class DashboardComponent extends BasicChartComponent {
   public rowData: IPriceTable[] = [];
   public columnDefs: ColDef<IPriceTable>[] = columnDefs;
   public dashboard: ExtendedGridsterItem[] = dashboard;
+  public coinStatsNames: string[] = coinStatsNames;
   public defaultColDef: ColDef = defaultColDef;
   public gridOptions: GridOptions = gridOptions;
   public gridsterOptions: GridsterConfig = gridsterOptions;
@@ -150,9 +151,7 @@ export class DashboardComponent extends BasicChartComponent {
     this.coins$.pipe(
       tap(({ coins }: CoinsStateModel) => {
         const selected = ensure<CoinDto>(coins.find((c: CoinDto) => c.id === id));
-        const stats = unionToArray<keyof CoinStats>()('marketCapRank', 'marketCap', 'circulatingSupply', 'totalSupply', 'totalVolume');
-
-        stats.forEach((name: string) => {
+        coinStatsNames.forEach((name: string) => {
           this.coinStats.set(name, selected[name as keyof CoinDto] as number);
         });
       })
