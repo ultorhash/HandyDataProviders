@@ -18,13 +18,15 @@ import {
 } from './components';
 import { BasicChartComponent } from './components/shared';
 import { CoinsState } from './store';
+import { TextPipe } from './pipes';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     DashboardComponent,
-    BasicChartComponent
+    BasicChartComponent,
+    TextPipe
   ],
   imports: [
     CommonModule,

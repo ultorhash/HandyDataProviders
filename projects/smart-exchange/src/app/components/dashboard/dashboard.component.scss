@@ -36,15 +36,32 @@ mat-card-header {
 mat-card-content {
   @include full-size;
   padding: 0;
+  margin-top: 5px;
   overflow-y: auto;
 }
 
 mat-list {
-  border: 1px solid red;
   padding: 0;
 }
 
 mat-list-item {
   padding: 0;
-  border: 1px solid limegreen;
+  height: 30px;
+}
+
+.mdc-list-item.mdc-list-item--with-one-line {
+  height: 30px;
+}
+
+::ng-deep .mat-mdc-list-item-unscoped-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.stat-name {
+  color: $gray200;
+}
+
+.stat-value {
+  color: $white;
 }
