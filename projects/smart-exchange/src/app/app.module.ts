@@ -8,7 +8,8 @@ import { UiCoreModule } from 'ui-core';
 import {
   LibraryModule,
   MaterialModule,
-  RoutingModule
+  RoutingModule,
+  TranslationModule
 } from './modules';
 
 import { AppComponent } from './app.component';
@@ -35,11 +36,12 @@ import { TextPipe } from './pipes';
     RoutingModule,
     MaterialModule,
     LibraryModule,
+    TranslationModule,
+    UiCoreModule,
     HttpClientModule,
     NgxsModule.forRoot([
       CoinsState
     ]),
-    UiCoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
