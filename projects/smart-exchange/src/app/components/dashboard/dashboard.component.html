@@ -47,7 +47,11 @@
           (rowClicked)="onRowClick($event)"
         >
         </ag-grid-angular>
-        <div *ngSwitchCase="cards.Summary">
+        <div
+          *ngSwitchCase="cards.Summary"
+          class="summary-container"
+        >
+          <mat-divider></mat-divider>
           <mat-list role="list">
             <mat-list-item
               *ngFor="let stat of coinStats | keyvalue"

@@ -20,11 +20,7 @@ import {
   gridOptions,
   gridsterOptions
 } from './dashboard.data';
-import {
-  ensure,
-  getChartLabel,
-  TextFormatter
-} from '../../utils';
+import { ensure, getChartLabel } from '../../utils';
 import { Cards } from './dashboard.enum';
 import { ExtendedGridsterItem } from './dashboard.interface';
 import { BasicChartComponent } from '../shared';
@@ -59,8 +55,8 @@ export class DashboardComponent extends BasicChartComponent {
 
   updateTable$(): Observable<CoinsStateModel> {
     return this.coins$.pipe(
-      tap((state: CoinsStateModel) => {
-        const priceData = state.coins.reduce((acc: IPriceTable[], curr: CoinDto) => {
+      tap(({ coins }) => {
+        const priceData = coins.reduce((acc: IPriceTable[], curr: CoinDto) => {
           return [
             ...acc, {
               id: curr.id,

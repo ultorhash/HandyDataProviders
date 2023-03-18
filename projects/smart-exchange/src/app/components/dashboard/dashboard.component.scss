@@ -40,6 +40,17 @@ mat-card-content {
   overflow-y: auto;
 }
 
+.summary-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+mat-divider {
+  border-top-color: $gray700;
+  border-top-width: 3px;
+}
+
 mat-list {
   padding: 0;
 }
