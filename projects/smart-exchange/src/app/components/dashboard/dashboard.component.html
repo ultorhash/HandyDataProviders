@@ -51,6 +51,16 @@
           *ngSwitchCase="cards.Summary"
           class="summary-container"
         >
+          <div
+            *ngIf="selected$ | async as coinLabel"
+            class="summary-header"
+          >
+            <img
+              [src]="coinLabel.image"
+              [alt]="coinLabel.name"
+            />
+            <h2>{{ coinLabel.name }}</h2>
+          </div>
           <mat-divider></mat-divider>
           <mat-list role="list">
             <mat-list-item

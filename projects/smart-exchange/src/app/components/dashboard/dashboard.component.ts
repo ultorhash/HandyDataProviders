@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable, tap, first, filter } from 'rxjs';
 import {
   ColDef,
@@ -25,7 +25,7 @@ import { IPriceTable } from '../../interfaces';
 import { CoingeckoService } from '../../services';
 import { BasicChartComponent } from '../shared';
 import { CoinLabel } from '../../types';
-import { CoinsState, CoinsStateModel } from '../../store';
+import { CoinsState } from '../../store';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -33,8 +33,9 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent extends BasicChartComponent implements OnInit {
-  @Select(CoinsState) coins$!: Observable<CoinsStateModel>;
+export class DashboardComponent extends BasicChartComponent {
+  @Select(CoinsState.getCoins) coins$!: Observable<CoinDto[]>;
+  @Select(CoinsState.getSelected) selected$!: Observable<CoinLabel>;
 
   private chart: Highcharts.Chart = {} as Highcharts.Chart;
   private gridApi: GridApi = {} as GridApi;
@@ -57,13 +58,9 @@ export class DashboardComponent extends BasicChartComponent implements OnInit {
     super();
   }
 
-  ngOnInit(): void {
-    //
-  }
-
-  updateTable$(): Observable<CoinsStateModel> {
+  updateTable$(): Observable<CoinDto[]> {
     return this.coins$.pipe(
-      tap(({ coins }) => {
+      tap((coins: CoinDto[]) => {
         const priceData = coins.reduce((acc: IPriceTable[], curr: CoinDto) => {
           return [
             ...acc, {
@@ -118,14 +115,16 @@ export class DashboardComponent extends BasicChartComponent implements OnInit {
     this.chart = chart;
 
     this.coins$.pipe(
-      filter((res: CoinsStateModel) => res.coins.length > 0),
+      filter((coins: CoinDto[]) => coins.length > 0),
       first(),
-      tap(({ coins }: CoinsStateModel) => {
-        this.updateCoinData({
+      tap((coins: CoinDto[]) => {
+        const label: CoinLabel = {
           id: coins[0].id,
           name: coins[0].name,
-          image: coins[0].image
-        });
+          image: coins[0].image,
+        };
+
+        this.updateCoinData(label);
       })
     )
     .subscribe();
@@ -153,7 +152,7 @@ export class DashboardComponent extends BasicChartComponent implements OnInit {
     //.subscribe();
 
     this.coins$.pipe(
-      tap(({ coins }: CoinsStateModel) => {
+      tap((coins: CoinDto[]) => {
         const selected = ensure<CoinDto>(coins.find((c: CoinDto) => c.id === id));
         coinStatsNames.forEach((name: string) => {
           this.coinStats.set(name, selected[name as keyof CoinDto] as number);

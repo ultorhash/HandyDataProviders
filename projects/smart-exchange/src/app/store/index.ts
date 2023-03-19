@@ -1,3 +1,3 @@
-export * from './actions/coins.action';
+export * from './actions/coin.actions';
 
-export * from './state/coins.state';
+export * from './state/coin.state';

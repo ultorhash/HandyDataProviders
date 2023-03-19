@@ -7,6 +7,7 @@
     "Highcharts",
     "hollowcandlestick",
     "ngxs",
-    "OHLC"
+    "OHLC",
+    "titlecase"
   ]
 }
