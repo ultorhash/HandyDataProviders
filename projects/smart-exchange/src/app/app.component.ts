@@ -4,7 +4,7 @@ import { Store } from '@ngxs/store';
 import { Observable, tap } from 'rxjs';
 import { CoinDto } from './dtos';
 import { CoingeckoService } from './services';
-import { Update } from './store';
+import { UpdateCoins } from './store';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
   fetchCoins$(): Observable<CoinDto[]> {
     return this.coingeckoService.getCoinsData$().pipe(
       tap((res: CoinDto[]) => {
-        this.store.dispatch(new Update(res));
+        this.store.dispatch(new UpdateCoins(res));
       })
     );
   }

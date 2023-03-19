@@ -7,7 +7,7 @@ import {
   GridReadyEvent,
   RowClickedEvent
 } from 'ag-grid-community';
-import { Select } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { GridsterConfig } from 'angular-gridster2';
 import { CoinDto, OHLCPricesDto } from '../../dtos';
 import {
@@ -25,7 +25,7 @@ import { IPriceTable } from '../../interfaces';
 import { CoingeckoService } from '../../services';
 import { BasicChartComponent } from '../shared';
 import { CoinLabel } from '../../types';
-import { CoinsState } from '../../store';
+import { ChangeSelectedCoin, CoinsState } from '../../store';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -52,6 +52,7 @@ export class DashboardComponent extends BasicChartComponent {
   public cards: typeof Cards = Cards;
 
   constructor(
+    private store: Store,
     private translateService: TranslateService,
     private coingeckoService: CoingeckoService
   ) {
@@ -100,6 +101,8 @@ export class DashboardComponent extends BasicChartComponent {
         name: name,
         image: image
       });
+
+      this.store.dispatch(new ChangeSelectedCoin(id));
     }
   }
 

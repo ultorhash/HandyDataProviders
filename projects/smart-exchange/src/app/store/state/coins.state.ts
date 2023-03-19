@@ -8,14 +8,14 @@ import {
 import { CoinDto } from '../../dtos';
 import { CoinLabel } from '../../types';
 import { ensure } from '../../utils';
-import { ChangeSelected, Update } from '../actions/coin.actions';
+import { ChangeSelectedCoin, UpdateCoins } from '../actions/coins.actions';
 
-export class CoinStateModel {
+export class CoinsStateModel {
   coins: CoinDto[] = [];
   selected: CoinLabel = {} as CoinLabel;
 }
 
-@State<CoinStateModel>({
+@State<CoinsStateModel>({
   name: 'coin',
   defaults: {
     coins: [],
@@ -31,26 +31,26 @@ export class CoinStateModel {
 })
 export class CoinsState {
   @Selector()
-  static getCoins(state: CoinStateModel): CoinDto[] {
+  static getCoins(state: CoinsStateModel): CoinDto[] {
     return state.coins;
   }
 
   @Selector()
-  static getSelected(state: CoinStateModel): CoinLabel {
+  static getSelected(state: CoinsStateModel): CoinLabel {
     return state.selected;
   }
 
-  @Action(Update)
-  update({ patchState }: StateContext<CoinStateModel>, { payload }: Update): void {
+  @Action(UpdateCoins)
+  update({ patchState }: StateContext<CoinsStateModel>, { payload }: UpdateCoins): void {
     patchState({
       coins: payload
     });
   }
 
-  @Action(ChangeSelected)
+  @Action(ChangeSelectedCoin)
   changeSelected(
-    { getState, patchState }: StateContext<CoinStateModel>,
-    { payload }: ChangeSelected
+    { getState, patchState }: StateContext<CoinsStateModel>,
+    { payload }: ChangeSelectedCoin
   ): void {
     const { coins } = getState();
     const coin = ensure(coins.find(c => c.id === payload));
