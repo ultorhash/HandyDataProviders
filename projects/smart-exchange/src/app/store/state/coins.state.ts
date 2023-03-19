@@ -6,24 +6,19 @@ import {
   Selector
 } from '@ngxs/store';
 import { CoinDto } from '../../dtos';
-import { CoinLabel } from '../../types';
 import { ensure } from '../../utils';
-import { ChangeSelectedCoin, UpdateCoins } from '../actions/coins.actions';
+import { SetSelectedCoin, UpdateCoins } from '../actions/coins.actions';
 
 export class CoinsStateModel {
   coins: CoinDto[] = [];
-  selected: CoinLabel = {} as CoinLabel;
+  selected: CoinDto = {} as CoinDto;
 }
 
 @State<CoinsStateModel>({
   name: 'coin',
   defaults: {
     coins: [],
-    selected: {
-      id: 'bitcoin',
-      name: 'Bitcoin',
-      image: 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579'
-    }
+    selected: {} as CoinDto
   }
 })
 @Injectable({
@@ -36,7 +31,7 @@ export class CoinsState {
   }
 
   @Selector()
-  static getSelected(state: CoinsStateModel): CoinLabel {
+  static getSelected(state: CoinsStateModel): CoinDto {
     return state.selected;
   }
 
@@ -47,21 +42,16 @@ export class CoinsState {
     });
   }
 
-  @Action(ChangeSelectedCoin)
+  @Action(SetSelectedCoin)
   changeSelected(
     { getState, patchState }: StateContext<CoinsStateModel>,
-    { payload }: ChangeSelectedCoin
+    { payload }: SetSelectedCoin
   ): void {
     const { coins } = getState();
     const coin = ensure(coins.find(c => c.id === payload));
-    const coinLabel: CoinLabel = {
-      id: coin.id,
-      name: coin.name,
-      image: coin.image
-    }
 
     patchState({
-      selected: coinLabel
+      selected: coin
     })
   }
 }

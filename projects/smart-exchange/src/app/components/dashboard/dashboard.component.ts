@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable, tap, first, filter, switchMap, map } from 'rxjs';
+import { Observable, tap, filter, switchMap, map } from 'rxjs';
 import {
   ColDef,
   GridApi,
@@ -20,12 +20,12 @@ import {
 } from './dashboard.data';
 import { Cards } from './dashboard.enum';
 import { ExtendedGridsterItem } from './dashboard.interface';
-import { ensure, getChartLabel } from '../../utils';
+import { getChartLabel, isEmpty } from '../../utils';
 import { IPriceTable } from '../../interfaces';
 import { CoingeckoService } from '../../services';
 import { BasicChartComponent } from '../shared';
 import { CoinLabel } from '../../types';
-import { ChangeSelectedCoin, CoinsState } from '../../store';
+import { SetSelectedCoin, CoinsState } from '../../store';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -35,7 +35,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class DashboardComponent extends BasicChartComponent {
   @Select(CoinsState.getCoins) coins$!: Observable<CoinDto[]>;
-  @Select(CoinsState.getSelected) selected$!: Observable<CoinLabel>;
+  @Select(CoinsState.getSelected) selected$!: Observable<CoinDto>;
 
   private chart: Highcharts.Chart = {} as Highcharts.Chart;
   private gridApi: GridApi = {} as GridApi;
@@ -81,9 +81,10 @@ export class DashboardComponent extends BasicChartComponent {
     );
   }
 
-  updateChart$(): Observable<OHLCPricesDto[]> {
+  updateData$(): Observable<OHLCPricesDto[]> {
     return this.selected$.pipe(
-      tap((coin: CoinLabel) => {
+      filter((coin: CoinDto) => !isEmpty(coin)),
+      tap((coin: CoinDto) => {
         this.chart.series[0].name = coin.name;
         this.chart.update({
           title: {
@@ -93,6 +94,10 @@ export class DashboardComponent extends BasicChartComponent {
               image: coin.image
             })
           }
+        });
+
+        coinStatsNames.forEach((name: string) => {
+          this.coinStats.set(name, coin[name as keyof CoinDto] as number);
         });
       }),
       map((coin: CoinLabel) => coin.id),
@@ -114,20 +119,12 @@ export class DashboardComponent extends BasicChartComponent {
   onTableReady(event: GridReadyEvent): void {
     this.gridApi = event.api;
     this.updateTable$().subscribe();
-    this.updateChart$().subscribe();
+    this.updateData$().subscribe();
   }
 
   onRowClick(row: RowClickedEvent<IPriceTable>): void {
     if (row.data) {
-      const { id, name, image } = row.data;
-
-      this.updateCoinData({
-        id: id,
-        name: name,
-        image: image
-      });
-
-      this.store.dispatch(new ChangeSelectedCoin(id));
+      this.store.dispatch(new SetSelectedCoin(row.data.id));
     }
   }
 
@@ -141,32 +138,5 @@ export class DashboardComponent extends BasicChartComponent {
 
   chartCallback: Highcharts.ChartCallbackFunction = (chart): void => {
     this.chart = chart;
-
-    this.coins$.pipe(
-      filter((coins: CoinDto[]) => coins.length > 0),
-      first(),
-      tap((coins: CoinDto[]) => {
-        const label: CoinLabel = {
-          id: coins[0].id,
-          name: coins[0].name,
-          image: coins[0].image,
-        };
-
-        this.updateCoinData(label);
-      })
-    ).subscribe();
-  }
-
-  updateCoinData(label: CoinLabel): void {
-    const { id, name, image } = label;
-
-    this.coins$.pipe(
-      tap((coins: CoinDto[]) => {
-        const selected = ensure<CoinDto>(coins.find((c: CoinDto) => c.id === id));
-        coinStatsNames.forEach((name: string) => {
-          this.coinStats.set(name, selected[name as keyof CoinDto] as number);
-        });
-      })
-    ).subscribe();
   }
 }

@@ -5,7 +5,7 @@ export class UpdateCoins {
   constructor(public payload: CoinDto[]) {}
 }
 
-export class ChangeSelectedCoin {
-  static readonly type = '[COINS] Change Selected';
+export class SetSelectedCoin {
+  static readonly type = '[COINS] Set Selected';
   constructor(public payload: string) {}
 }
