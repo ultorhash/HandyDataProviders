@@ -10,7 +10,7 @@ import {
 @NgModule({
   imports: [
     TranslateModule.forChild({
-      defaultLanguage: 'en',
+      defaultLanguage: 'pl',
       loader: {
         provide: TranslateLoader,
         useFactory: (http: HttpClient) => new TranslateHttpLoader(http),

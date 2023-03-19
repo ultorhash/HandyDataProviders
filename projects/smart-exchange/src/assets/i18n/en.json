@@ -1,6 +1,7 @@
 {
-  "symbol": "symbol",
-  "price": "price",
-  "change": "change",
-  "change %": "change %"
+  "circulating supply": "circulation supply",
+  "market cap": "market cap",
+  "market cap rank": "market cap rank",
+  "total supply": "total supply",
+  "total volume": "total volume"
 }

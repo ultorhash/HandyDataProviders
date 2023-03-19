@@ -1,5 +1,7 @@
 {
-  "symbol": "symbol",
-  "price": "cena",
-  "change": "zmiana"
+  "circulating supply": "zasilenie obiegowe",
+  "market cap": "kapitalizacja",
+  "market cap rank": "pozycja",
+  "total supply": "całkowita podaż",
+  "total volume": "całkowity wolumen"
 }
