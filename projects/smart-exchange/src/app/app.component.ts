@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
-import { Observable, tap } from 'rxjs';
+import { first, Observable, tap } from 'rxjs';
 import { CoinDto } from './dtos';
 import { CoingeckoService } from './services';
 import { SetSelectedCoin, UpdateCoins } from './store';
@@ -24,10 +24,11 @@ export class AppComponent implements OnInit {
   fetchCoins$(): Observable<CoinDto[]> {
     return this.coingeckoService.getCoinsData$().pipe(
       tap((res: CoinDto[]) => {
-        this.store.dispatch([
-          new UpdateCoins(res),
-          new SetSelectedCoin(res[0].id)
-        ]);
+        this.store.dispatch(new UpdateCoins(res));
+      }),
+      first(),
+      tap((res: CoinDto[]) => {
+        this.store.dispatch(new SetSelectedCoin(res[0].id));
       })
     );
   }
