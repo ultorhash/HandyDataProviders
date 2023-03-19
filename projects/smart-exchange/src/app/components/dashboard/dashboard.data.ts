@@ -13,7 +13,7 @@ import { ExtendedGridsterItem } from "./dashboard.interface";
 
 export const columnDefs: ColDef<IPriceTable>[] = [
   {
-    headerName: 'Symbol',
+    headerName: 'symbol',
     field: 'symbol',
     cellRenderer: (params: ValueFormatterParams<IPriceTable, string>) => {
       return `
@@ -28,11 +28,11 @@ export const columnDefs: ColDef<IPriceTable>[] = [
     }
   },
   {
-    headerName: 'Price',
+    headerName: 'price',
     field: 'price'
   },
   {
-    headerName: 'Change',
+    headerName: 'change',
     field: 'change',
     cellClass: (params: CellClassParams<IPriceTable, number>) => {
       return params.value > 0
@@ -43,7 +43,7 @@ export const columnDefs: ColDef<IPriceTable>[] = [
     }
   },
   {
-    headerName: 'Change %',
+    headerName: 'change %',
     field: 'percentageChange',
     cellClass: (params: CellClassParams<IPriceTable, number>) => {
       return params.value > 0

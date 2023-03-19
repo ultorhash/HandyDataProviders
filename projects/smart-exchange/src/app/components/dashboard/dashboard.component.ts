@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable, tap, first, filter } from 'rxjs';
 import {
   ColDef,
@@ -10,8 +10,6 @@ import {
 import { Select } from '@ngxs/store';
 import { GridsterConfig } from 'angular-gridster2';
 import { CoinDto, OHLCPricesDto } from '../../dtos';
-import { IPriceTable } from '../../interfaces';
-import { CoingeckoService } from '../../services';
 import {
   coinStatsNames,
   columnDefs,
@@ -20,19 +18,22 @@ import {
   gridOptions,
   gridsterOptions
 } from './dashboard.data';
-import { ensure, getChartLabel } from '../../utils';
 import { Cards } from './dashboard.enum';
 import { ExtendedGridsterItem } from './dashboard.interface';
+import { ensure, getChartLabel } from '../../utils';
+import { IPriceTable } from '../../interfaces';
+import { CoingeckoService } from '../../services';
 import { BasicChartComponent } from '../shared';
 import { CoinLabel } from '../../types';
 import { CoinsState, CoinsStateModel } from '../../store';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent extends BasicChartComponent {
+export class DashboardComponent extends BasicChartComponent implements OnInit {
   @Select(CoinsState) coins$!: Observable<CoinsStateModel>;
 
   private chart: Highcharts.Chart = {} as Highcharts.Chart;
@@ -49,8 +50,15 @@ export class DashboardComponent extends BasicChartComponent {
 
   public cards: typeof Cards = Cards;
 
-  constructor(private coingeckoService: CoingeckoService) {
+  constructor(
+    private translateService: TranslateService,
+    private coingeckoService: CoingeckoService
+  ) {
     super();
+  }
+
+  ngOnInit(): void {
+    //
   }
 
   updateTable$(): Observable<CoinsStateModel> {

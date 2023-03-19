@@ -21,6 +21,15 @@ export abstract class TextFormatter {
     }
   }
 
+  /**
+   * Converts passed text to capitalized version.
+   * @param text Text to transform.
+   * @returns Capitalized text.
+   */
+  public static capitalize(text: string) {
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  }
+
   private static sliceText(str: string): string {
     return str.replace(/([A-Z])/g, ' $1');
   }

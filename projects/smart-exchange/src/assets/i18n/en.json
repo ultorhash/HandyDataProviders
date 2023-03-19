@@ -1,5 +1,6 @@
 {
   "symbol": "symbol",
   "price": "price",
-  "change": "change"
+  "change": "change",
+  "change %": "change %"
 }
