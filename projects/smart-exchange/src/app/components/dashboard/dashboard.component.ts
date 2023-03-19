@@ -24,7 +24,6 @@ import { getChartLabel, isEmpty } from '../../utils';
 import { IPriceTable } from '../../interfaces';
 import { CoingeckoService } from '../../services';
 import { BasicChartComponent } from '../shared';
-import { CoinLabel } from '../../types';
 import { SetSelectedCoin, CoinsState } from '../../store';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -66,7 +65,6 @@ export class DashboardComponent extends BasicChartComponent {
           return [
             ...acc, {
               id: curr.id,
-              name: curr.name,
               image: curr.image,
               symbol: curr.symbol.toUpperCase(),
               change: curr.priceChange24h,
@@ -100,7 +98,7 @@ export class DashboardComponent extends BasicChartComponent {
           this.coinStats.set(name, coin[name as keyof CoinDto] as number);
         });
       }),
-      map((coin: CoinLabel) => coin.id),
+      map((coin: CoinDto) => coin.id),
       switchMap((id: string) => {
         return this.coingeckoService.getCoinOhlcPrices$(id, 30)
       }),

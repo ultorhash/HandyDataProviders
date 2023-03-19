@@ -47,12 +47,16 @@ ag-grid-angular {
   border: 1px solid transparent !important;
 }
 
-.cell__value-positive {
+.value-positive {
   color: $green-value !important;
 }
 
-.cell__value-negative {
+.value-negative {
   color: $red-value !important;
+}
+
+.value-neutral {
+  color: $white !important;
 }
 
 .cell__value-image {
@@ -104,6 +108,10 @@ gridster .gridster-row {
 .gridster-item-resizable-handler.handle-w,
 .gridster-item-resizable-handler.handle-e {
   width: 5px !important;
+}
+
+.card-content {
+  cursor: default;
 }
 /* endregion gridster */
 

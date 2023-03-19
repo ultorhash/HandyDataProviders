@@ -52,17 +52,25 @@
           class="summary-container"
         >
           <div
-            *ngIf="selected$ | async as coinLabel"
+            *ngIf="selected$ | async as coin"
             class="summary-header"
           >
             <img
-              [src]="coinLabel.image"
-              [alt]="coinLabel.name"
+              [src]="coin.image"
+              [alt]="coin.name"
             />
             <h2>
-              {{ coinLabel.name }}
+              {{ coin.name }}
+              <span
+                [ngClass]="{
+                  'value-positive': coin.priceChangePercentage24h > 0,
+                  'value-negative': coin.priceChangePercentage24h < 0,
+                  'value-neutral': coin.priceChangePercentage24h === 0
+                }"
+              >
+                {{ coin.priceChangePercentage24h | number: '1.2-2' }}%
+              </span>
             </h2>
-
           </div>
           <mat-divider></mat-divider>
           <mat-list role="list">

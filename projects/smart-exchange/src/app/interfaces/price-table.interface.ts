@@ -1,6 +1,6 @@
-import { CoinLabel } from "../types";
-
-export interface IPriceTable extends CoinLabel {
+export interface IPriceTable {
+  id: string;
+  image: string;
   symbol: string;
   change: number;
   percentageChange: number;

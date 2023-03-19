@@ -36,10 +36,10 @@ export const columnDefs: ColDef<IPriceTable>[] = [
     field: 'change',
     cellClass: (params: CellClassParams<IPriceTable, number>) => {
       return params.value > 0
-        ? 'cell__value-positive'
+        ? 'value-positive'
         : params.value < 0
-          ? 'cell__value-negative'
-          : '';
+          ? 'value-negative'
+          : 'value-neutral';
     }
   },
   {
@@ -47,10 +47,10 @@ export const columnDefs: ColDef<IPriceTable>[] = [
     field: 'percentageChange',
     cellClass: (params: CellClassParams<IPriceTable, number>) => {
       return params.value > 0
-        ? 'cell__value-positive'
+        ? 'value-positive'
         : params.value < 0
-          ? 'cell__value-negative'
-          : '';
+          ? 'value-negative'
+          : 'value-neutral';
     },
     valueFormatter: (params: ValueFormatterParams<IPriceTable>) => {
       return `${params.data!.percentageChange.toFixed(2)}%`;
