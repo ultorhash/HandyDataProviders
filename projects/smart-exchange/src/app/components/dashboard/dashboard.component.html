@@ -43,7 +43,7 @@
           [rowDragMultiRow]="true"
           [rowDragManaged]="true"
           [animateRows]="true"
-          (gridReady)="onPriceTableReady($event)"
+          (gridReady)="onTableReady($event)"
           (rowClicked)="onRowClick($event)"
         >
         </ag-grid-angular>
@@ -59,7 +59,10 @@
               [src]="coinLabel.image"
               [alt]="coinLabel.name"
             />
-            <h2>{{ coinLabel.name }}</h2>
+            <h2>
+              {{ coinLabel.name }}
+            </h2>
+
           </div>
           <mat-divider></mat-divider>
           <mat-list role="list">

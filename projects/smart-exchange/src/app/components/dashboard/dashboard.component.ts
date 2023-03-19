@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable, tap, first, filter } from 'rxjs';
+import { Observable, tap, first, filter, switchMap, map } from 'rxjs';
 import {
   ColDef,
   GridApi,
@@ -81,15 +81,40 @@ export class DashboardComponent extends BasicChartComponent {
     );
   }
 
+  updateChart$(): Observable<OHLCPricesDto[]> {
+    return this.selected$.pipe(
+      tap((coin: CoinLabel) => {
+        this.chart.series[0].name = coin.name;
+        this.chart.update({
+          title: {
+            text: getChartLabel({
+              id: coin.id,
+              name: coin.name,
+              image: coin.image
+            })
+          }
+        });
+      }),
+      map((coin: CoinLabel) => coin.id),
+      switchMap((id: string) => {
+        return this.coingeckoService.getCoinOhlcPrices$(id, 30)
+      }),
+      tap((res: OHLCPricesDto[]) => {
+        this.chart.series[0].setData(res, true);
+      })
+    )
+  }
+
   onResize(item: ExtendedGridsterItem): void {
     if (item.id === Cards.Chart) {
       this.chart.reflow();
     }
   }
 
-  onPriceTableReady(event: GridReadyEvent): void {
+  onTableReady(event: GridReadyEvent): void {
     this.gridApi = event.api;
     this.updateTable$().subscribe();
+    this.updateChart$().subscribe();
   }
 
   onRowClick(row: RowClickedEvent<IPriceTable>): void {
@@ -129,30 +154,11 @@ export class DashboardComponent extends BasicChartComponent {
 
         this.updateCoinData(label);
       })
-    )
-    .subscribe();
+    ).subscribe();
   }
 
   updateCoinData(label: CoinLabel): void {
     const { id, name, image } = label;
-
-    this.coingeckoService.getCoinOhlcPrices$(id, 30).pipe(
-      first(),
-      tap((res: OHLCPricesDto[]) => {
-        this.chart.series[0].setData(res, true);
-        this.chart.series[0].name = name;
-        this.chart.update({
-          title: {
-            text: getChartLabel({
-              id: id,
-              name: name,
-              image: image
-            })
-          }
-        })
-      })
-    )
-    //.subscribe();
 
     this.coins$.pipe(
       tap((coins: CoinDto[]) => {

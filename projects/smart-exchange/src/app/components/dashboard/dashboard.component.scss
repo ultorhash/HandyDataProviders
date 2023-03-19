@@ -48,7 +48,6 @@ mat-card-content {
 
 .summary-header {
   @include content-center;
-  border: 1px solid red;
   height: 40px;
   color: $white;
 
@@ -64,7 +63,7 @@ mat-card-content {
 
 mat-divider {
   border-top-color: $gray700;
-  border-top-width: 3px;
+  border-top-width: 2px;
 }
 
 mat-list {
