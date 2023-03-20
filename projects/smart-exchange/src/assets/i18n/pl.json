@@ -3,5 +3,8 @@
   "market cap": "kapitalizacja",
   "market cap rank": "pozycja",
   "total supply": "całkowita podaż",
-  "total volume": "całkowity wolumen"
+  "total volume": "całkowity wolumen",
+  "max supply": "maksymalne zasilenie",
+  "ath": "najwyższa cena",
+  "atl": "najniższa cena"
 }

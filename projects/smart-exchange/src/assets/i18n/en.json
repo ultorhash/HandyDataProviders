@@ -3,5 +3,8 @@
   "market cap": "market cap",
   "market cap rank": "market cap rank",
   "total supply": "total supply",
-  "total volume": "total volume"
+  "total volume": "total volume",
+  "max supply": "max supply",
+  "ath": "ath",
+  "atl": "atl"
 }

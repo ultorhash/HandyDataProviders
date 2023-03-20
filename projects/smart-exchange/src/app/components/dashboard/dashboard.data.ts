@@ -124,5 +124,8 @@ export const coinStatsNames = unionToArray<keyof CoinStats>()(
   'marketCap',
   'circulatingSupply',
   'totalSupply',
-  'totalVolume'
+  'totalVolume',
+  'maxSupply',
+  'ath',
+  'atl'
 );

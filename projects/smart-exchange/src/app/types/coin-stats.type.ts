@@ -8,5 +8,8 @@ export type CoinStats = Pick<CoinDto,
   'circulatingSupply' |
   'marketCap' |
   'totalSupply' |
-  'totalVolume'
+  'totalVolume' |
+  'maxSupply' |
+  'ath' |
+  'atl'
 >;
