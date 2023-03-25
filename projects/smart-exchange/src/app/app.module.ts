@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxsModule } from '@ngxs/store';
-import { UiCoreModule } from 'ui-core';
 import {
   LibraryModule,
   MaterialModule,
@@ -15,7 +14,8 @@ import {
 import { AppComponent } from './app.component';
 import {
   HomeComponent,
-  DashboardComponent
+  DashboardComponent,
+  LangPickerComponent
 } from './components';
 import { BasicChartComponent } from './components/shared';
 import { CoinsState } from './store';
@@ -27,7 +27,8 @@ import { TextPipe } from './pipes';
     HomeComponent,
     DashboardComponent,
     BasicChartComponent,
-    TextPipe
+    TextPipe,
+    LangPickerComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +38,6 @@ import { TextPipe } from './pipes';
     MaterialModule,
     LibraryModule,
     TranslationModule,
-    UiCoreModule,
     HttpClientModule,
     NgxsModule.forRoot([
       CoinsState

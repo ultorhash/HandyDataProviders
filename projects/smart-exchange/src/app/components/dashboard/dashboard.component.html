@@ -83,8 +83,8 @@
             </mat-list-item>
           </mat-list>
         </div>
-        <div *ngSwitchDefault>
-          {{ item.id }}
+        <div *ngSwitchCase="cards.Options">
+          <app-lang-picker></app-lang-picker>
         </div>
       </mat-card-content>
     </mat-card>  

@@ -1,0 +1,52 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/variables.scss';
+@import '../../../styles/colors.scss';
+
+mat-form-field {
+  width: $input-small-width;
+  height: $input-small-height;
+  font-size: $input-small-font-size;
+}
+
+mat-select-trigger {
+  font-size: $input-small-font-size;
+  display: flex;
+  gap: 10px;
+}
+
+mat-select {
+  display: flex;
+}
+
+mat-option {
+  min-height: unset;
+  height: $input-small-height;
+  font-size: $input-small-font-size;
+}
+
+::ng-deep .mat-mdc-select-value {
+  color: $black;
+}
+
+::ng-deep .mat-mdc-option .mdc-list-item__primary-text {
+  display: flex;
+  gap: 10px;
+}
+
+::ng-deep .mdc-menu-surface.mat-mdc-select-panel {
+  padding: 0 !important;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper .mat-mdc-form-field-infix {
+  @include content-center(center, 0);
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  min-height: unset;
+  height: $input-small-height;
+  padding: $input-small-padding;
+}
+
+::ng-deep .mdc-text-field {
+  border-radius: 0 !important;
+  padding: 0 !important;
+}

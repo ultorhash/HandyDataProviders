@@ -2,6 +2,7 @@
 @import '~ag-grid-community/styles/ag-grid.css';
 @import '~ag-grid-community/styles/ag-theme-alpine.css';
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import "/node_modules/flag-icons/css/flag-icons.min.css";
 @import './styles/colors.scss';
 @import './styles/variables.scss';
 @import './styles/mixins.scss';
@@ -44,7 +45,7 @@ ag-grid-angular {
 }
 
 .ag-cell-focus {
-  border: 1px solid transparent !important;
+  border: 1px solid $transparent !important;
 }
 
 .value-positive {
@@ -69,6 +70,7 @@ ag-grid-angular {
 }
 /* endregion ag-grid */
 
+
 /* highcharts */
 highcharts-chart {
   display: block;
@@ -90,6 +92,7 @@ highcharts-chart {
   padding: 0 !important;
 }
 /* endregion highcharts */
+
 
 /* region gridster */
 gridster .gridster-column {
@@ -115,6 +118,7 @@ gridster .gridster-row {
 }
 /* endregion gridster */
 
+
 /* #region scroll bars */
 ::-webkit-scrollbar {
   width: 8px;
@@ -129,3 +133,41 @@ gridster .gridster-row {
   background-color: $gray500;
 }
 /* #endregion scroll bars */
+
+
+/* #region form fields */
+mat-option,
+mat-select-trigger,
+.mat-mdc-select-arrow,
+.mat-primary .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+  color: $white !important;
+}
+
+mat-option {
+  background-color: $gray600 !important;
+
+  &:hover {
+    background-color: $gray500 !important;
+  }
+}
+
+mat-pseudo-checkbox {
+  display: none !important;
+}
+
+.mdc-text-field--no-label:not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mat-mdc-form-field-infix {
+  background-color: $gray700 !important;
+}
+
+.mdc-list-item.mdc-list-item--selected {
+  background-color: $blue700 !important;
+}
+
+.mat-mdc-form-field-focus-overlay {
+  background-color: $transparent !important;
+}
+
+.mdc-line-ripple::before {
+  border-bottom-width: 0 !important;
+}
+/* #endregion form fields */
