@@ -1,6 +1,7 @@
 import {
   CellClassParams,
   ColDef,
+  GetQuickFilterTextParams,
   GridOptions,
   ValueFormatterParams
 } from "ag-grid-community";
@@ -25,6 +26,9 @@ export const columnDefs: ColDef<IPriceTable>[] = [
           ${params.value}
         </div>
       `;
+    },
+    getQuickFilterText: (params: GetQuickFilterTextParams<IPriceTable, string>) => {
+      return params.value;
     }
   },
   {

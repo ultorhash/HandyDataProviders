@@ -1,0 +1,11 @@
+@import './colors.scss';
+
+mat-form-field {
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none !important;
+  }
+
+  .mdc-text-field__input {
+    color: $white !important;
+  }
+}

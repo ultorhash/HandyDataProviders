@@ -31,22 +31,36 @@
           [callbackFunction]="chartCallback"
         >
         </highcharts-chart>
-        <ag-grid-angular
+        <div
           *ngSwitchCase="cards.PriceTable"
-          class="ag-theme-alpine"
-          rowSelection="multiple"
-          [columnDefs]="columnDefs"
-          [defaultColDef]="defaultColDef"
-          [gridOptions]="gridOptions"
-          [rowData]="rowData"
-          [rowDragEntireRow]="true"
-          [rowDragMultiRow]="true"
-          [rowDragManaged]="true"
-          [animateRows]="true"
-          (gridReady)="onTableReady($event)"
-          (rowClicked)="onRowClick($event)"
+          class="table-container"
         >
-        </ag-grid-angular>
+          <mat-form-field
+            appearance="fill"
+            class="form-field__search"
+          >
+            <input
+              matInput
+              placeholder="Search for coin"
+              (keyup)="onSearch($event)"
+            >
+          </mat-form-field>
+          <ag-grid-angular
+            class="ag-theme-alpine"
+            rowSelection="multiple"
+            [columnDefs]="columnDefs"
+            [defaultColDef]="defaultColDef"
+            [gridOptions]="gridOptions"
+            [rowData]="rowData"
+            [rowDragEntireRow]="true"
+            [rowDragMultiRow]="true"
+            [rowDragManaged]="true"
+            [animateRows]="true"
+            (gridReady)="onTableReady($event)"
+            (rowClicked)="onRowClick($event)"
+          >
+          </ag-grid-angular>
+        </div>
         <div
           *ngSwitchCase="cards.Summary"
           class="summary-container"

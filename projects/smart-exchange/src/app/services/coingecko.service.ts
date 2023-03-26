@@ -26,7 +26,7 @@ export class CoingeckoService {
    */
   getCoinsData$(
     recap: Recaps = Recaps.USD,
-    quantity: number = 50
+    quantity: number = 250
   ): Observable<CoinDto[]> {
     return timer(0, 30000).pipe(
       mergeMap(() => {

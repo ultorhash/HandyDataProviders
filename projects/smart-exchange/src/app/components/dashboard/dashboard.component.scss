@@ -44,6 +44,10 @@ mat-card-content {
   }
 }
 
+.table-container {
+  height: calc(100% - 30px);
+}
+
 .summary-container {
   display: flex;
   flex-direction: column;
@@ -64,6 +68,10 @@ mat-card-content {
   h2 {
     margin: 0;
   }
+}
+
+.form-field__search {
+  width: 100%;
 }
 
 mat-divider {

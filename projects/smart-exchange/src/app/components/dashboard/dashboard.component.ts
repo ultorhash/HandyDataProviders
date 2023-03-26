@@ -131,6 +131,11 @@ export class DashboardComponent extends BasicChartComponent {
     }
   }
 
+  onSearch(event: Event): void {
+    const searchValue = (event.target as HTMLInputElement).value;
+    this.gridApi.setQuickFilter(searchValue);
+  }
+
   chartCallback: Highcharts.ChartCallbackFunction = (chart): void => {
     this.chart = chart;
   }
