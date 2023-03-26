@@ -6,11 +6,12 @@ import {
   TranslateModule,
   TranslateStore
 } from '@ngx-translate/core';
+import { LangCodes } from '../enums';
 
 @NgModule({
   imports: [
     TranslateModule.forChild({
-      defaultLanguage: 'pl',
+      defaultLanguage: LangCodes.EN,
       loader: {
         provide: TranslateLoader,
         useFactory: (http: HttpClient) => new TranslateHttpLoader(http),

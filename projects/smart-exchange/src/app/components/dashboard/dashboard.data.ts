@@ -84,7 +84,7 @@ export const dashboard: ExtendedGridsterItem[] = [
   {
     id: Cards.Options,
     cols: 10,
-    rows: 1,
+    rows: 2,
     y: 0,
     x: 0,
     dragEnabled: true,

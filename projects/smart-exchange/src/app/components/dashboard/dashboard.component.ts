@@ -25,8 +25,6 @@ import { IPriceTable } from '../../interfaces';
 import { CoingeckoService } from '../../services';
 import { BasicChartComponent } from '../shared';
 import { SetSelectedCoin, CoinsState } from '../../store';
-import { TranslateService } from '@ngx-translate/core';
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -52,7 +50,6 @@ export class DashboardComponent extends BasicChartComponent {
 
   constructor(
     private store: Store,
-    private translateService: TranslateService,
     private coingeckoService: CoingeckoService
   ) {
     super();

@@ -7,14 +7,14 @@
     (selectionChange)="onSelectionChange($event)"
   >
     <mat-select-trigger>
-      <span [className]="'fi fi-' + selectedLang.code"></span>
+      <span [className]="'fi fi-' + selectedLang.flagCode"></span>
       {{ selectedLang.nativeName }}
     </mat-select-trigger>
     <mat-option
       *ngFor="let option of langOptions"
       [value]="option"
     >
-      <span [className]="'fi fi-' + option.code"></span>
+      <span [className]="'fi fi-' + option.flagCode"></span>
       {{ option.nativeName }}
     </mat-option>
   </mat-select>

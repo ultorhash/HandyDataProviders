@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
 import { first, Observable, tap } from 'rxjs';
 import { CoinDto } from './dtos';
@@ -13,7 +12,6 @@ import { SetSelectedCoin, UpdateCoins } from './store';
 export class AppComponent implements OnInit {
   constructor(
     private store: Store,
-    private translateService: TranslateService,
     private coingeckoService: CoingeckoService
   ) {}
 
