@@ -12,5 +12,9 @@ export const langOptions: ILangOption[] = [
   {
     nativeName: 'Français',
     code: 'fr'
+  },
+  {
+    nativeName: '日本',
+    code: 'jp'
   }
 ];

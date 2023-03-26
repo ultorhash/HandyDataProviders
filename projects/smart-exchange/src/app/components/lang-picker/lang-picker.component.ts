@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { MatSelect, MatSelectChange } from '@angular/material/select';
 import { langOptions } from './lang-picker.data';
 import { ILangOption } from './lang-picker.interface';
 
@@ -8,10 +9,13 @@ import { ILangOption } from './lang-picker.interface';
   styleUrls: ['./lang-picker.component.scss']
 })
 export class LangPickerComponent {
+  @ViewChild(MatSelect) select: MatSelect = {} as MatSelect;
+
   public langOptions: ILangOption[] = langOptions;
   public selectedLang: ILangOption = langOptions[0];
 
-  onLangChange(langOption: ILangOption): void {
-    this.selectedLang = langOption;
+  onSelectionChange(change: MatSelectChange) {
+    this.selectedLang = change.value;
+    this.select.close();
   }
 }

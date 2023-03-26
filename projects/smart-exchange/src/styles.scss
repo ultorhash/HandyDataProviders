@@ -166,4 +166,8 @@ mat-pseudo-checkbox {
 .mdc-line-ripple::before {
   border-bottom-width: 0 !important;
 }
+
+.mdc-menu-surface {
+  border-radius: 0 !important;
+}
 /* #endregion form fields */

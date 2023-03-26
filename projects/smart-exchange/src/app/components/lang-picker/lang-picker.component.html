@@ -2,7 +2,10 @@
   appearance="fill"
   subscriptSizing="dynamic"
 >
-  <mat-select [(value)]="selectedLang">
+  <mat-select
+    [(value)]="selectedLang"
+    (selectionChange)="onSelectionChange($event)"
+  >
     <mat-select-trigger>
       <span [className]="'fi fi-' + selectedLang.code"></span>
       {{ selectedLang.nativeName }}
@@ -10,7 +13,6 @@
     <mat-option
       *ngFor="let option of langOptions"
       [value]="option"
-      (onSelectionChange)="onLangChange(option)"
     >
       <span [className]="'fi fi-' + option.code"></span>
       {{ option.nativeName }}
