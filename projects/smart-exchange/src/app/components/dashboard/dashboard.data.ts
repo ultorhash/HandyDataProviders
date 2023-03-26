@@ -93,7 +93,7 @@ export const dashboard: ExtendedGridsterItem[] = [
   },
   {
     id: Cards.Chart,
-    cols: 21,
+    cols: 22,
     rows: 16,
     x: 0,
     y: 2,
@@ -102,18 +102,18 @@ export const dashboard: ExtendedGridsterItem[] = [
   },
   {
     id: Cards.PriceTable,
-    cols: 11,
+    cols: 10,
     rows: 10,
-    x: 21,
+    x: 22,
     y: 2,
     dragEnabled: true,
     resizeEnabled: true
   },
   {
     id: Cards.Summary,
-    cols: 11,
+    cols: 10,
     rows: 6,
-    x: 21,
+    x: 22,
     y: 12,
     dragEnabled: true,
     resizeEnabled: true
