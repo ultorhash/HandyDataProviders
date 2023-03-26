@@ -11,7 +11,7 @@ import { LangCodes } from '../enums';
 @NgModule({
   imports: [
     TranslateModule.forChild({
-      defaultLanguage: LangCodes.EN,
+      defaultLanguage: LangCodes.EN_US,
       loader: {
         provide: TranslateLoader,
         useFactory: (http: HttpClient) => new TranslateHttpLoader(http),
