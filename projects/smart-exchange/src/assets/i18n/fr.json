@@ -1,10 +1,10 @@
 {
-  "circulating supply": "",
-  "market cap": "",
-  "market cap rank": "",
-  "total supply": "",
-  "total volume": "",
-  "max supply": "",
-  "ath": "",
-  "atl": ""
+  "circulating supply": "alimentation en circulation",
+  "market cap": "capitalisation boursière",
+  "market cap rank": "capitalisation boursière rang",
+  "total supply": "offre totale",
+  "total volume": "volume total",
+  "max supply": "alimentation maximale",
+  "ath": "prix le plus élevé",
+  "atl": "prix le plus bas"
 }

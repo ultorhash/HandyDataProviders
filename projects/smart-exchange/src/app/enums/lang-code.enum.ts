@@ -6,5 +6,6 @@ export enum LangCodes {
   EN_GB = 'en-gb',
   PL = 'pl',
   FR = 'fr',
+  ES = 'es',
   JP = 'jp'
 }

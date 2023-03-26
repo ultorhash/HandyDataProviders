@@ -22,6 +22,11 @@ export const langOptions: ILangOption[] = [
     flagCode: 'fr'
   },
   {
+    nativeName: 'Español',
+    code: 'es',
+    flagCode: 'es'
+  },
+  {
     nativeName: '日本',
     code: 'jp',
     flagCode: 'jp'
