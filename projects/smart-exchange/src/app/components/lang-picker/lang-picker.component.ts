@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatSelect, MatSelectChange } from '@angular/material/select';
 import { langOptions } from './lang-picker.data';
 import { ILangOption } from './lang-picker.interface';
