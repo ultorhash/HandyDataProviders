@@ -14,6 +14,7 @@
     (keyup)="onKeyUp($event)"
   >
   <button
+    *ngIf="input.value"
     matSuffix
     disableRipple
     mat-icon-button
