@@ -77,43 +77,44 @@ export const gridsterOptions: GridsterConfig = {
     ignoreContentClass: 'card-content',
   },
   gridType: 'fit',
-  displayGrid: 'always'
+  displayGrid: 'always',
+  swap: true
 };
 
 export const dashboard: ExtendedGridsterItem[] = [
   {
     id: Cards.Options,
-    cols: 10,
-    rows: 1,
-    y: 0,
+    cols: 32,
+    rows: 2,
     x: 0,
+    y: 0,
     dragEnabled: true,
     resizeEnabled: true
   },
   {
     id: Cards.Chart,
-    cols: 7,
-    rows: 10,
-    y: 1,
+    cols: 21,
+    rows: 16,
     x: 0,
+    y: 2,
     dragEnabled: true,
     resizeEnabled: true
   },
   {
     id: Cards.PriceTable,
-    cols: 3,
-    rows: 6,
-    y: 1,
-    x: 7,
+    cols: 11,
+    rows: 10,
+    x: 21,
+    y: 2,
     dragEnabled: true,
     resizeEnabled: true
   },
   {
     id: Cards.Summary,
-    cols: 3,
-    rows: 4,
-    y: 7,
-    x: 7,
+    cols: 11,
+    rows: 6,
+    x: 21,
+    y: 12,
     dragEnabled: true,
     resizeEnabled: true
   }

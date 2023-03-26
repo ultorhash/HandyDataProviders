@@ -1,21 +1,24 @@
 /** General specification for different buttons */
 
+$small-button-size: 16px;
+
 ::ng-deep .icon-button__small.mat-mdc-icon-button {
   border-radius: 0;
-  width: 20px;
-  height: 20px;
+  width: $small-button-size;
+  height: $small-button-size;
+  line-height: $small-button-size;
   padding: 0;
 
   --mat-mdc-button-persistent-ripple-color: transparent;
 
   .icon {
-    width: 20px;
-    height: 20px;
-    font-size: 20px;
+    width: $small-button-size;
+    height: $small-button-size;
+    font-size: $small-button-size;
   }
 
   .mat-mdc-button-touch-target {
-    width: 20px;
-    height: 20px;
+    width: $small-button-size;
+    height: $small-button-size;
   }
 }
