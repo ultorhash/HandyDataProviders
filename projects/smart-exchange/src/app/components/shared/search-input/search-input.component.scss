@@ -1,0 +1,33 @@
+@import '../../../../styles/colors.scss';
+@import '../../../../styles/variables.scss';
+@import '../../../../styles/mixins.scss';
+
+.form-field__small {
+  height: $input-small-height;
+
+  .mat-icon,
+  .mdc-icon-button {
+    width: $input-small-height;
+    height: $input-small-height;
+  }
+
+  .mdc-icon-button {
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .mat-icon {
+    @include content-center(center, 0);
+    font-size: 20px;
+    color: $gray300;
+  }
+}
+
+::ng-deep .mat-mdc-icon-button .mat-mdc-button-touch-target {
+  width: $input-small-height;
+  height: $input-small-height;
+}
+
+::ng-deep .no-errors .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}

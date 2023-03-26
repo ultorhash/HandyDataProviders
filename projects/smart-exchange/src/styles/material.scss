@@ -1,11 +1,66 @@
 @import './colors.scss';
 
-mat-form-field {
-  .mat-mdc-form-field-subscript-wrapper {
-    display: none !important;
-  }
+mat-form-field,
+.mat-mdc-form-field-flex {
+  color: $white;
+  background-color: $gray700;
+}
 
+mat-form-field {
   .mdc-text-field__input {
     color: $white !important;
   }
+
+  .mdc-text-field__input::placeholder {
+    color: $gray300 !important;
+  }
 }
+
+.mdc-line-ripple::before {
+  border-bottom-width: 0 !important;
+}
+
+// mat-form-field {
+//   .mat-mdc-form-field-subscript-wrapper {
+//     display: none !important;
+//   }
+
+//   .mdc-text-field__input {
+//     color: $white !important;
+//   }
+// }
+
+// mat-option,
+// mat-select-trigger,
+// .mat-mdc-select-arrow,
+// .mat-primary .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+//   color: $white !important;
+// }
+
+// mat-option {
+//   background-color: $gray600 !important;
+
+//   &:hover {
+//     background-color: $gray500 !important;
+//   }
+// }
+
+// mat-pseudo-checkbox {
+//   display: none !important;
+// }
+
+// .mdc-text-field--no-label:not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mat-mdc-form-field-infix {
+//   background-color: $gray700 !important;
+// }
+
+// .mdc-list-item.mdc-list-item--selected {
+//   background-color: $blue700 !important;
+// }
+
+// .mdc-line-ripple::before {
+//   border-bottom-width: 0 !important;
+// }
+
+// .mdc-menu-surface {
+//   border-radius: 0 !important;
+// }

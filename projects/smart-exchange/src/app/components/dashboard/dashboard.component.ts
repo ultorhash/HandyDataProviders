@@ -105,6 +105,10 @@ export class DashboardComponent extends BasicChartComponent {
     )
   }
 
+  chartCallback: Highcharts.ChartCallbackFunction = (chart): void => {
+    this.chart = chart;
+  }
+
   onResize(item: ExtendedGridsterItem): void {
     if (item.id === Cards.Chart) {
       this.chart.reflow();
@@ -131,12 +135,7 @@ export class DashboardComponent extends BasicChartComponent {
     }
   }
 
-  onSearch(event: Event): void {
-    const searchValue = (event.target as HTMLInputElement).value;
-    this.gridApi.setQuickFilter(searchValue);
-  }
-
-  chartCallback: Highcharts.ChartCallbackFunction = (chart): void => {
-    this.chart = chart;
+  onSearch(value: string): void {
+    this.gridApi.setQuickFilter(value);
   }
 }

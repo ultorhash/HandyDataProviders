@@ -35,16 +35,13 @@
           *ngSwitchCase="cards.PriceTable"
           class="table-container"
         >
-          <mat-form-field
-            appearance="fill"
-            class="form-field__search"
-          >
-            <input
-              matInput
-              placeholder="Search for coin"
-              (keyup)="onSearch($event)"
-            >
-          </mat-form-field>
+          <app-search-input
+            placeholder="search coins..."
+            size="small"
+            [disableSubscript]="true"
+            [fullWidth]="true"
+            (keyup)="onSearch($event)"
+          ></app-search-input>
           <ag-grid-angular
             class="ag-theme-alpine"
             rowSelection="multiple"

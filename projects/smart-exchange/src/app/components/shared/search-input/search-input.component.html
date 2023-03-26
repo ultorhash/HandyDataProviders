@@ -1,0 +1,24 @@
+<mat-form-field
+  appearance="fill"
+  [ngClass]="{
+    'form-field__small': size === 'small',
+    'form-field__medium': size === 'medium',
+    'form-field__large': size === 'large',
+    'no-errors': disableSubscript
+  }"
+  [style.width]="fullWidth ? '100%' : 'auto'"
+>
+  <input
+    matInput
+    [placeholder]="placeholder"
+    (keyup)="onKeyUp($event)"
+  >
+  <button
+    matSuffix
+    disableRipple
+    mat-icon-button
+    (click)="onClear()"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>

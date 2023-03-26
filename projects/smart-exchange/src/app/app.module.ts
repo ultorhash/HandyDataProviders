@@ -10,16 +10,18 @@ import {
   RoutingModule,
   TranslationModule
 } from './modules';
-
+import { CoinsState } from './store';
+import { TextPipe } from './pipes';
 import { AppComponent } from './app.component';
 import {
   HomeComponent,
   DashboardComponent,
   LangPickerComponent
 } from './components';
-import { BasicChartComponent } from './components/shared';
-import { CoinsState } from './store';
-import { TextPipe } from './pipes';
+import {
+  BasicChartComponent,
+  SearchInputComponent
+} from './components/shared';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { TextPipe } from './pipes';
     DashboardComponent,
     BasicChartComponent,
     TextPipe,
-    LangPickerComponent
+    LangPickerComponent,
+    SearchInputComponent
   ],
   imports: [
     CommonModule,
