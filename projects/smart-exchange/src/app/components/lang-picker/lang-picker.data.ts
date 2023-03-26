@@ -3,8 +3,13 @@ import { ILangOption } from "./lang-picker.interface";
 export const langOptions: ILangOption[] = [
   {
     nativeName: 'English US',
-    code: 'en',
+    code: 'en-us',
     flagCode: 'us'
+  },
+  {
+    nativeName: 'English GB',
+    code: 'en-gb',
+    flagCode: 'gb'
   },
   {
     nativeName: 'Polski',
