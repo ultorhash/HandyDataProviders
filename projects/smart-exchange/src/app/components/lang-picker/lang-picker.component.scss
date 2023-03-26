@@ -22,6 +22,7 @@ mat-option {
   min-height: unset;
   height: $input-small-height;
   font-size: $input-small-font-size;
+  padding: $input-small-padding;
 }
 
 ::ng-deep .mat-mdc-select-value {
