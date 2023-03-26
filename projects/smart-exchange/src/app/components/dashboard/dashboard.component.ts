@@ -138,4 +138,8 @@ export class DashboardComponent extends BasicChartComponent {
   onSearch(value: string): void {
     this.gridApi.setQuickFilter(value);
   }
+
+  onClear(): void {
+    this.gridApi.setQuickFilter('');
+  }
 }

@@ -31,6 +31,9 @@ export class SearchInputComponent {
   /** Value to emit on key up. */
   @Output() keyup = new EventEmitter<string>();
 
+  /** Triggers clear input. */
+  @Output() clear = new EventEmitter<void>();
+
   onKeyUp(event: Event): void {
     event.stopPropagation();
     const value = (event.target as HTMLInputElement).value;
@@ -39,5 +42,6 @@ export class SearchInputComponent {
 
   onClear(): void {
     this.input.value = "";
+    this.clear.emit();
   }
 }
