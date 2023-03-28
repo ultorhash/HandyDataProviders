@@ -1,27 +1,31 @@
 # HandyDataProviders
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.1.
+Specification:
+- `Angular`: 15.2.1
+- `Angular Material`: 15.2.1
 
-## Development server
+Technologies:
+<img align="left" width="30px" height="30px" src="https://www.svgrepo.com/show/354478/typescript-icon.svg" title="Typescript" />
+<img align="left" width="30px" height="30px" src="https://www.svgrepo.com/show/349502/scss.svg" title="Scss"/>
+<img align="left" width="30px" height="30px" src="https://www.svgrepo.com/show/353396/angular-icon.svg" title="Angular"/>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Applications
+#### [`Smart Exchange`]
+The purpose of the project is to present cryptocurrencies data and prices in real time. It uses a free API provided by Coingecko company. Users can easily customize dashboards according to your their preferences by sorting, rearranging and modifing provided data.
 
-## Code scaffolding
+Main additional libraries:
+- [Highcharts](https://www.highcharts.com) [site]
+- [NGXS](https://www.ngxs.io/) [site]
+- [Angular Gridster](https://github.com/tiberiuzuld/angular-gridster2) [git]
+- [Ngx-Translate](https://github.com/ngx-translate/core) [git]
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Libraries
+#### [`UI-Core`]
+An UI Library that contains additional components and rules for all of HandyDataProviders applications in order to maintain UX guidline. Changes to common UI components will be applied to all applications using them.
 
-## Build
+## Development
+#### Applications
+To run selected application, type `npm start` or `yarn start` after you switch to its directory.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+#### Libraries
+In order to compile and apply latest changes in libary, use `ng build --configuration production` command with optional `--watch` flag at the end to save and run automatically every applied changes.
