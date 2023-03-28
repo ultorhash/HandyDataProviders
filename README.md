@@ -9,7 +9,8 @@ HandyDataProviders is a collection of programs designed to provide users with us
 <img align="left" width="30px" height="30px" src="https://www.svgrepo.com/show/354478/typescript-icon.svg" title="Typescript" />
 <img align="left" width="30px" height="30px" src="https://www.svgrepo.com/show/349502/sass.svg" title="Sass"/>
 <img align="left" width="30px" height="30px" src="https://www.svgrepo.com/show/353396/angular-icon.svg" title="Angular"/>
-<img align="left" width="30px" height="30px" src="https://drive.google.com/file/d/1309VbFpxs4dho3c8qZDd2Wpfq4qiI2OA/view" title="RxJs"/>
+<img align="left" width="30px" height="30px" src="https://github.com/ReactiveX/rxjs/blob/master/resources/CI-CD/logo/svg/RxJs_Logo_Basic.svg" title="RxJs"/>
+<br />
 
 ## Applications
 #### [`Smart Exchange`]
@@ -23,7 +24,7 @@ Main additional libraries:
 
 ## Libraries
 #### [`UI-Core`]
-An UI Library that contains additional components and rules for all of HandyDataProviders applications in order to maintain UX guidline. Changes to common UI components will be applied to all applications using them.
+An UI Library that contains additional components and rules for all of HandyDataProviders applications in order to maintain UX guideline. Changes to common UI components will be applied to all applications using them.
 
 ## Development
 #### Applications
