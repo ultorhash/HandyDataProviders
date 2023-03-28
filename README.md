@@ -1,13 +1,15 @@
 # HandyDataProviders
+HandyDataProviders is a collection of programs designed to provide users with useful data in specific types of applications. Consists of main applications and additional libraries that maintain established standards to maintain consistency in UX.
 
-Specification:
+## Specification:
 - `Angular`: 15.2.1
 - `Angular Material`: 15.2.1
 
-Technologies:
+## Technologies:
 <img align="left" width="30px" height="30px" src="https://www.svgrepo.com/show/354478/typescript-icon.svg" title="Typescript" />
-<img align="left" width="30px" height="30px" src="https://www.svgrepo.com/show/349502/scss.svg" title="Scss"/>
+<img align="left" width="30px" height="30px" src="https://www.svgrepo.com/show/349502/sass.svg" title="Sass"/>
 <img align="left" width="30px" height="30px" src="https://www.svgrepo.com/show/353396/angular-icon.svg" title="Angular"/>
+<img align="left" width="30px" height="30px" src="https://drive.google.com/file/d/1309VbFpxs4dho3c8qZDd2Wpfq4qiI2OA/view" title="RxJs"/>
 
 ## Applications
 #### [`Smart Exchange`]
